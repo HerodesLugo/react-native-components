@@ -8,6 +8,7 @@ import Input from "@/components/input/Input";
 import { InputSize, InputType, InputVariant } from "@/components/input/types";
 import ProgressBar from "@/components/progressBar/ProgressBar";
 import Select from "@/components/select/Select";
+import CustomSlider from "@/components/slider/Slider";
 import Switch from "@/components/switch/Switch";
 import { SwitchSize } from "@/components/switch/types";
 import Wrapper from "@/components/ui/Wrapper";
@@ -170,7 +171,7 @@ export default function Index() {
             />
           </View>
         </Wrapper>
-        
+
         {/* Progress Bar */}
         <Wrapper label="Progress Bar" className="p-5 gap-4">
           <View className="flex flex-row gap-2">
@@ -213,6 +214,32 @@ export default function Index() {
             fillColor="#3b82f6"
             height={20}
             progress={progress ? parseFloat(progress) : 0}
+          />
+        </Wrapper>
+
+        {/* Select */}
+        <Wrapper label="Select">
+          <Select
+            value="Select Option"
+            options={[
+              { label: "Option 1", value: "option1" },
+              { label: "Option 2", value: "option2" },
+              { label: "Option 3", value: "option3" },
+            ]}
+            placeholder="Select an option"
+            onChange={(value) => alert(`Selected: ${value}`)}
+          />
+        </Wrapper>
+
+        {/* Slider */}
+        <Wrapper label="Slider">
+          <CustomSlider
+            height={20}
+            minimumValue={0}
+            maximumValue={100}
+            minimumTrackTintColor="#c11c1c"
+            maximumTrackTintColor="#513636"
+            thumbTintColor="#0000FF"
           />
         </Wrapper>
       </View>
