@@ -1,3 +1,4 @@
+import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { ProgressBarProps } from './type';
 
@@ -21,7 +22,7 @@ const ProgressBar: React.FC<ProgressBarProps> = ({
     >
       <View
         style={{
-          width: `${Math.max(0, Math.min(progress, 1)) * 100}%`,
+          width: `${Math.max(0, Math.min(progress, 1)) * progress}%`,
           height: '100%',
           backgroundColor: fillColor,
           borderRadius,

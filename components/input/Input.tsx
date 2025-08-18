@@ -23,7 +23,7 @@ const Input: FC<
   const keyboardType = type === "number" ? "numeric" : "default";
 
   return (
-    <View>
+    <View className="flex-1">
       {label && <Text className="mb-2">{label}</Text>}
       <TextInput
         className={inputClass}
