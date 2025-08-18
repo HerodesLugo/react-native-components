@@ -12,7 +12,8 @@ const Button = ({
   action = "primary",
   ...Props
 }: ButtonProps) => {
-  const buttonClass = `rounded ${sizeClasses[size]} ${variantClasses[variant](action)} ${className || ""}`;
+  const disabledClass = disabled ? "opacity-50" : "";
+  const buttonClass = `rounded ${sizeClasses[size]} ${variantClasses[variant](action)} ${disabledClass} ${className || ""}`;
 
   return (
     <TouchableOpacity>

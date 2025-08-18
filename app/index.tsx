@@ -27,6 +27,7 @@ export default function Index() {
   return (
     <View className="p-5 gap-4 flex-1 ">
       <StatusBar style="light" />
+      {/* TODO:BUTTON */}
       <Wrapper className="gap-4" label="Button">
         <View className="flex flex-row">
           <Text className="flex-1">Variant</Text>
@@ -71,13 +72,12 @@ export default function Index() {
           variant={buttonVariant}
           action={buttonAction}
           size={buttonSize}
-          disabled
           onPress={() => alert("Button pressed!")}
         >
           <Text className="text-center text-black">Hello World</Text>
         </Button>
       </Wrapper>
-
+      {/* TODO:INPUT */}
       <Wrapper label="Input">
         <View className="flex-row my-2">
           <Text className="flex-1">Variant</Text>
@@ -126,6 +126,7 @@ export default function Index() {
           invalid={inputVariant === "error"}
         />
       </Wrapper>
+      {/* TODO:INPUT */}
       {/* ...resto del código comentado... */}
     </View>
   );
