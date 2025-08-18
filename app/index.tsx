@@ -7,6 +7,8 @@ import {
 import Input from "@/components/input/Input";
 import { InputSize, InputType, InputVariant } from "@/components/input/types";
 import ProgressBar from "@/components/progressBar/ProgressBar";
+import RadioButton, { RadioButtonSize } from "@/components/radio/RadioButton";
+
 import Select from "@/components/select/Select";
 import CustomSlider from "@/components/slider/Slider";
 import Switch from "@/components/switch/Switch";
@@ -30,6 +32,12 @@ export default function Index() {
   // Estado para Switch
   const [switchDisabled, setSwitchDisabled] = useState(false);
   const [switchSize, setSwitchSize] = useState<SwitchSize>("md");
+
+  // Estado para RadioButton
+  const [selectedValue, setSelectedValue] = useState("apple");
+  const [radioSize, setRadioSize] = useState<RadioButtonSize>("md");
+  const [radioInvalid, setRadioInvalid] = useState(false);
+  const [radioDisabled, setRadioDisabled] = useState(false);
 
   //Estado para progress
   const [progress, setProgress] = useState<string>("");
@@ -143,7 +151,7 @@ export default function Index() {
           />
         </Wrapper>
 
-        {/* TODO: SWITCH --- */}
+        {/* --- SWITCH --- */}
         <Wrapper label="Switch">
           <View className="flex-row my-2">
             <Text className="flex-1">Size</Text>
@@ -160,19 +168,75 @@ export default function Index() {
               onChange={(value) => setSwitchSize(value as SwitchSize)}
             />
           </View>
-
-          {/* Control para deshabilitar el switch principal */}
-          <View className="flex-row items-center justify-between  bg-gray-100 rounded-md">
+          <View className="flex-row items-center justify-between bg-gray-100 rounded-md p-2">
             <Text>Disable Switch</Text>
             <Switch
-              size={switchSize}
+              size="md" // Control switch should be a fixed size
               value={switchDisabled}
               onValueChange={setSwitchDisabled}
             />
           </View>
         </Wrapper>
 
-        {/* Progress Bar */}
+        {/* --- RADIO BUTTON --- */}
+        <Wrapper label="Radio Button">
+          <View className="flex-row my-2">
+            <Text className="flex-1">Size</Text>
+          </View>
+          <View className="flex flex-row gap-1 mb-4">
+            <Select
+              options={[
+                { label: "Small", value: "sm" },
+                { label: "Medium", value: "md" },
+                { label: "Large", value: "lg" },
+              ]}
+              value={radioSize}
+              placeholder="Select size"
+              onChange={(value) => setRadioSize(value as RadioButtonSize)}
+            />
+          </View>
+          <View className="flex-row items-center justify-between bg-gray-100 rounded-md p-2 mb-2">
+            <Text>Invalid State</Text>
+            <Switch size="md" value={radioInvalid} onValueChange={setRadioInvalid} />
+          </View>
+          <View className="flex-row items-center justify-between bg-gray-100 rounded-md p-2 mb-4">
+            <Text>Disable Group</Text>
+            <Switch size="md" value={radioDisabled} onValueChange={setRadioDisabled} />
+          </View>
+          
+          {/* RadioButton Group */}
+          <View>
+            <RadioButton
+              label="Manzana"
+              value="apple"
+              selectedValue={selectedValue}
+              onSelect={setSelectedValue}
+              size={radioSize}
+              invalid={radioInvalid}
+              disabled={radioDisabled}
+            />
+            <RadioButton
+              label="Naranja"
+              value="orange"
+              selectedValue={selectedValue}
+              onSelect={setSelectedValue}
+              size={radioSize}
+              invalid={radioInvalid}
+              disabled={radioDisabled}
+            />
+            <RadioButton
+              label="Banana"
+              value="banana"
+              selectedValue={selectedValue}
+              onSelect={setSelectedValue}
+              size={radioSize}
+              invalid={radioInvalid}
+              disabled={radioDisabled}
+            />
+          </View>
+        </Wrapper>
+
+        {/* --- PROGRESS BAR --- */}
         <Wrapper label="Progress Bar" className="p-5 gap-4">
           <View className="flex flex-row gap-2">
             <Input
@@ -209,18 +273,17 @@ export default function Index() {
             />
           </View>
           <ProgressBar
-            backgroundColor="#e0e0e0"
-            borderRadius={borderRadius ? parseFloat(borderRadius) : 0}
-            fillColor="#3b82f6"
+            backgroundColor={backgroundColor || "#e0e0e0"}
+            borderRadius={borderRadius ? parseFloat(borderRadius) : 8}
+            fillColor={fillColor || "#3b82f6"}
             height={20}
             progress={progress ? parseFloat(progress) : 0}
           />
         </Wrapper>
 
-        {/* Select */}
+        {/* --- SELECT --- */}
         <Wrapper label="Select">
           <Select
-            value="Select Option"
             options={[
               { label: "Option 1", value: "option1" },
               { label: "Option 2", value: "option2" },
@@ -231,7 +294,7 @@ export default function Index() {
           />
         </Wrapper>
 
-        {/* Slider */}
+        {/* --- SLIDER --- */}
         <Wrapper label="Slider">
           <CustomSlider
             height={20}
@@ -242,6 +305,7 @@ export default function Index() {
             thumbTintColor="#0000FF"
           />
         </Wrapper>
+
       </View>
     </ScrollView>
   );
