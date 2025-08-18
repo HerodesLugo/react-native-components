@@ -8,6 +8,7 @@ import Input from "@/components/input/Input";
 import { InputSize, InputType, InputVariant } from "@/components/input/types";
 import Select from "@/components/select/Select";
 import Wrapper from "@/components/ui/Wrapper";
+import { StatusBar } from "expo-status-bar";
 import { useState } from "react";
 import { Text, View } from "react-native";
 
@@ -24,7 +25,8 @@ export default function Index() {
   const [inputType, setInputType] = useState<InputType>("text");
 
   return (
-    <View className="p-5 gap-4">
+    <View className="p-5 gap-4 flex-1 ">
+      <StatusBar style="light" />
       <Wrapper className="gap-4" label="Button">
         <View className="flex flex-row">
           <Text className="flex-1">Variant</Text>

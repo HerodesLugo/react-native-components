@@ -13,7 +13,7 @@ const Wrapper: React.FC<WrapperProps> = ({ children, className, label }) => {
     <View
       className={`border border-gray-400 rounded-lg  p-2.5 justify-between ${className}`}
     >
-      {label && <Text className="text-center">{label}</Text>}
+      {label && <Text className="text-center text-gray-500 font-bold text-2xl">{label}</Text>}
       {children}
     </View>
   );
