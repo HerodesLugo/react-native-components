@@ -1,0 +1,22 @@
+import React, { ReactNode } from "react";
+import { Text, View } from "react-native";
+
+interface WrapperProps {
+  children: ReactNode;
+  className?: string;
+  label?: string;
+  
+}
+
+const Wrapper: React.FC<WrapperProps> = ({ children, className, label }) => {
+  return (
+    <View
+      className={`border border-gray-400 rounded-lg  p-2.5 justify-between ${className}`}
+    >
+      {label && <Text className="text-center">{label}</Text>}
+      {children}
+    </View>
+  );
+};
+
+export default Wrapper;
