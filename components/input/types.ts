@@ -9,4 +9,7 @@ export interface InputProps extends TextInputProps {
   size?: InputSize;
   variant?: InputVariant;
   className?: string;
+  invalid?: boolean;
+  disabled?: boolean;
+  type?: InputType;
 }
