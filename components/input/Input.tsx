@@ -8,7 +8,8 @@ const Input: FC<
 > = ({
   label,
   size = "md",
-  variant = "solid",
+  variant = "outline",
+  
   className = "",
   invalid = false,
   disabled = false,

@@ -8,6 +8,7 @@ import Checkbox from "@/components/checkbox/Checkbox";
 import { CheckboxSize } from "@/components/checkbox/types";
 import Input from "@/components/input/Input";
 import { InputSize, InputType, InputVariant } from "@/components/input/types";
+import CustomModal from "@/components/modal/CustomModal";
 import ProgressBar from "@/components/progressBar/ProgressBar";
 import RadioButton from "@/components/radio/RadioButton";
 import { RadioButtonSize } from "@/components/radio/types";
@@ -15,6 +16,7 @@ import Select from "@/components/select/Select";
 import CustomSlider from "@/components/slider/Slider";
 import Switch from "@/components/switch/Switch";
 import { SwitchSize } from "@/components/switch/types";
+import TextArea from "@/components/textArea/TextArea";
 import Wrapper from "@/components/ui/Wrapper";
 import { StatusBar } from "expo-status-bar";
 import { useState } from "react";
@@ -71,6 +73,9 @@ export default function Index() {
       [id]: newValue,
     }));
   };
+
+  // Estado para mostrar el Modal
+  const [isModalVisible, setIsModalVisible] = useState(false);
 
   return (
     <ScrollView className="p-5 flex-1 flex flex-col ">
@@ -386,7 +391,7 @@ export default function Index() {
                 label="Estado Inválido"
                 value={isInvalid}
                 onValueChange={setIsInvalid}
-                activeTrackColor="#EF4444" // Rojo
+                activeTrackColor="#EF4444"
               />
             </View>
 
@@ -398,6 +403,23 @@ export default function Index() {
               />
             </View>
           </View>
+        </Wrapper>
+
+        <Wrapper label="Text Area">
+          <TextArea />
+        </Wrapper>
+
+        <Wrapper label="Modal">
+          <Button className="my-5" onPress={() => setIsModalVisible(true)}>
+            <Text className="text-center">Show Modal</Text>
+          </Button>
+
+          <CustomModal onClose={() => setIsModalVisible(false)} visible={isModalVisible}>
+            <Text className="text-center">Holita que tal</Text>
+            <Button variant="outline" className="my-2" onPress={() => setIsModalVisible(false)}>
+              <Text className="text-center text-black">Close Modal</Text>
+            </Button>
+          </CustomModal>
         </Wrapper>
       </View>
     </ScrollView>

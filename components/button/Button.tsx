@@ -1,4 +1,4 @@
-import { Pressable, TouchableOpacity } from "react-native";
+import { Pressable } from "react-native";
 import { ButtonProps } from "./types";
 import { sizeClasses, variantClasses } from "./variants";
 
@@ -16,16 +16,14 @@ const Button = ({
   const buttonClass = `rounded ${sizeClasses[size]} ${variantClasses[variant](action)} ${disabledClass} ${className || ""}`;
 
   return (
-    <TouchableOpacity>
-      <Pressable
-        onPress={onPress}
-        disabled={disabled}
-        className={buttonClass}
-        {...Props}
-      >
-        {children}
-      </Pressable>
-    </TouchableOpacity>
+    <Pressable
+      onPress={onPress}
+      disabled={disabled}
+      className={buttonClass}
+      {...Props}
+    >
+      {children}
+    </Pressable>
   );
 };
 

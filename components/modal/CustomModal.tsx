@@ -1,14 +1,10 @@
 import { Modal, View } from "react-native";
-import { styleModal } from "./styles";
 import { CustomModalProps } from "./types";
 
 const CustomModal: React.FC<CustomModalProps> = ({
   visible,
   onClose,
   children,
-  overlayStyle = {},
-  contentStyle = {},
-
 }) => {
   return (
     <Modal
@@ -17,9 +13,12 @@ const CustomModal: React.FC<CustomModalProps> = ({
       animationType="fade"
       onRequestClose={onClose}
     >
-      <View style={[styleModal.overlay, overlayStyle]}>
-        <View style={[styleModal.content, contentStyle]}>
-    
+      <View
+        className="flex-1 justify-center items-center bg-black/30"
+      >
+        <View
+          className="bg-white rounded-xl p-5 min-w-[70%] shadow-lg"
+        >
           {children}
         </View>
       </View>
