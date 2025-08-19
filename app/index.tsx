@@ -4,11 +4,13 @@ import {
   ButtonSize,
   ButtonVariant,
 } from "@/components/button/types";
+import Checkbox from "@/components/checkbox/Checkbox";
+import { CheckboxSize } from "@/components/checkbox/types";
 import Input from "@/components/input/Input";
 import { InputSize, InputType, InputVariant } from "@/components/input/types";
 import ProgressBar from "@/components/progressBar/ProgressBar";
-import RadioButton, { RadioButtonSize } from "@/components/radio/RadioButton";
-
+import RadioButton from "@/components/radio/RadioButton";
+import { RadioButtonSize } from "@/components/radio/types";
 import Select from "@/components/select/Select";
 import CustomSlider from "@/components/slider/Slider";
 import Switch from "@/components/switch/Switch";
@@ -17,6 +19,12 @@ import Wrapper from "@/components/ui/Wrapper";
 import { StatusBar } from "expo-status-bar";
 import { useState } from "react";
 import { ScrollView, Text, View } from "react-native";
+
+const PREFERENCES = [
+  { id: "newsletter", label: "Recibir boletín informativo" },
+  { id: "promotions", label: "Aceptar promociones especiales" },
+  { id: "updates", label: "Notificarme sobre actualizaciones" },
+];
 
 export default function Index() {
   // Estado para Button
@@ -44,6 +52,25 @@ export default function Index() {
   const [backgroundColor, setBackgroundColor] = useState<string>("");
   const [borderRadius, setBorderRadius] = useState<string>("");
   const [fillColor, setFillColor] = useState<string>("");
+
+  // Estado para los valores de los checkboxes
+  const [checkedState, setCheckedState] = useState({
+    newsletter: true,
+    promotions: false,
+    updates: true,
+  });
+
+  // Estado para controlar las props del grupo de checkboxes
+  const [isInvalid, setIsInvalid] = useState(false);
+  const [isDisabled, setIsDisabled] = useState(false);
+  const [checkboxSize, setCheckboxSize] = useState<CheckboxSize>("md");
+
+  const handleCheckboxChange = (id: string, newValue: boolean) => {
+    setCheckedState((prevState) => ({
+      ...prevState,
+      [id]: newValue,
+    }));
+  };
 
   return (
     <ScrollView className="p-5 flex-1 flex flex-col ">
@@ -197,13 +224,21 @@ export default function Index() {
           </View>
           <View className="flex-row items-center justify-between bg-gray-100 rounded-md p-2 mb-2">
             <Text>Invalid State</Text>
-            <Switch size="md" value={radioInvalid} onValueChange={setRadioInvalid} />
+            <Switch
+              size="md"
+              value={radioInvalid}
+              onValueChange={setRadioInvalid}
+            />
           </View>
           <View className="flex-row items-center justify-between bg-gray-100 rounded-md p-2 mb-4">
             <Text>Disable Group</Text>
-            <Switch size="md" value={radioDisabled} onValueChange={setRadioDisabled} />
+            <Switch
+              size="md"
+              value={radioDisabled}
+              onValueChange={setRadioDisabled}
+            />
           </View>
-          
+
           {/* RadioButton Group */}
           <View>
             <RadioButton
@@ -289,6 +324,7 @@ export default function Index() {
               { label: "Option 2", value: "option2" },
               { label: "Option 3", value: "option3" },
             ]}
+            value=""
             placeholder="Select an option"
             onChange={(value) => alert(`Selected: ${value}`)}
           />
@@ -306,6 +342,63 @@ export default function Index() {
           />
         </Wrapper>
 
+        <Wrapper label="Checkbox">
+          {/* Grupo de Checkboxes */}
+
+          <View>
+            <Text>Tus suscripciones</Text>
+            {PREFERENCES.map((item) => (
+              <Checkbox
+                key={item.id}
+                label={item.label}
+                value={checkedState[item.id as keyof typeof checkedState]}
+                onValueChange={(newValue) =>
+                  handleCheckboxChange(item.id, newValue)
+                }
+                size={checkboxSize}
+                invalid={isInvalid}
+                disabled={isDisabled}
+              />
+            ))}
+          </View>
+
+          {/* Controles para probar las variantes */}
+          <View className="my-4">
+            <Text>Controles de Variante</Text>
+
+            {/* Control de Tamaño */}
+            <View className="my-2">
+              <Text>Tamaño</Text>
+              <Select
+                options={[
+                  { label: "Pequeño", value: "sm" },
+                  { label: "Mediano", value: "md" },
+                  { label: "Grande", value: "lg" },
+                ]}
+                value={checkboxSize}
+                placeholder="Seleccionar tamaño"
+                onChange={(value) => setCheckboxSize(value as CheckboxSize)}
+              />
+            </View>
+
+            <View>
+              <Switch
+                label="Estado Inválido"
+                value={isInvalid}
+                onValueChange={setIsInvalid}
+                activeTrackColor="#EF4444" // Rojo
+              />
+            </View>
+
+            <View className="my-2">
+              <Switch
+                label="Deshabilitar Grupo"
+                value={isDisabled}
+                onValueChange={setIsDisabled}
+              />
+            </View>
+          </View>
+        </Wrapper>
       </View>
     </ScrollView>
   );

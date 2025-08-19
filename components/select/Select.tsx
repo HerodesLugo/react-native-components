@@ -15,7 +15,6 @@ const Select: React.FC<SelectProps> = ({
   selectedOptionStyle = {},
   labelStyle = {},
 }) => {
-  
   const [visible, setVisible] = useState(false);
   const selected = options.find((opt) => opt.value === value);
 
@@ -29,7 +28,7 @@ const Select: React.FC<SelectProps> = ({
           {selected ? selected.label : placeholder}
         </Text>
       </TouchableOpacity>
-      
+
       <SelectContent
         onChange={onChange}
         visible={visible}
@@ -38,9 +37,6 @@ const Select: React.FC<SelectProps> = ({
         dropdownStyle={dropdownStyle}
         optionStyle={optionStyle}
       />
-
-      
-
     </View>
   );
 };

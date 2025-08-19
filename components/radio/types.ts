@@ -1,16 +1,12 @@
-import { PressableProps } from "react-native";
 
-export type RadioButtonSize = "xs" | "sm" | "md" | "lg";
-export type RadioButtonVariant = "solid" | "outline";
-export type RadioButtonAction = "primary" | "secondary" | "negative" | "positive";
+export type RadioButtonSize = "sm" | "md" | "lg";
 
-export interface RadioButtonProps extends PressableProps {
-  selected?: boolean;
-  onPress?: () => void;
-  disabled?: boolean;
-  className?: string;
-  label?: string;
+export interface RadioButtonProps {
+  label: string;
+  value: any; 
+  selectedValue: any; 
+  onSelect: (value: any) => void;
   size?: RadioButtonSize;
-  variant?: RadioButtonVariant;
-  action?: RadioButtonAction;
+  invalid?: boolean;
+  disabled?: boolean;
 }

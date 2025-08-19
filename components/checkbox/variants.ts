@@ -1,18 +1,14 @@
 export const SIZES = {
   sm: {
-    outer: 20,
-    inner: 10,
+    box: 20,
     textClass: "text-sm",
   },
   md: {
-    outer: 24,
-    inner: 12,
+    box: 24,
     textClass: "text-base",
   },
   lg: {
-    outer: 28,
-    inner: 14,
+    box: 28,
     textClass: "text-lg",
   },
 };
-
