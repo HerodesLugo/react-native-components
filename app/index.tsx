@@ -9,6 +9,7 @@ import { CheckboxSize } from "@/components/checkbox/types";
 import Input from "@/components/input/Input";
 import { InputSize, InputType, InputVariant } from "@/components/input/types";
 import CustomModal from "@/components/modal/CustomModal";
+import { ModalVariant } from "@/components/modal/types";
 import ProgressBar from "@/components/progressBar/ProgressBar";
 import RadioButton from "@/components/radio/RadioButton";
 import { RadioButtonSize } from "@/components/radio/types";
@@ -17,6 +18,7 @@ import CustomSlider from "@/components/slider/Slider";
 import Switch from "@/components/switch/Switch";
 import { SwitchSize } from "@/components/switch/types";
 import TextArea from "@/components/textArea/TextArea";
+import { TextAreaSize } from "@/components/textArea/types";
 import Wrapper from "@/components/ui/Wrapper";
 import { StatusBar } from "expo-status-bar";
 import { useState } from "react";
@@ -75,11 +77,32 @@ export default function Index() {
   };
 
   // Estado para mostrar el Modal
-  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [modalVisible, setModalVisible] = useState(false);
+  const [modalVariant, setModalVariant] = useState<ModalVariant>("center");
+  const [backdropClass, setBackdropClass] = useState("bg-black/40");
+
+  const openModal = (variant: ModalVariant) => {
+    setModalVariant(variant);
+    // Cambiamos el fondo si es el bottom sheet para demostrar la funcionalidad
+    if (variant === "bottom") {
+      setBackdropClass("bg-blue-900/50");
+    } else {
+      setBackdropClass("bg-black/40");
+    }
+    setModalVisible(true);
+  };
+
+  const [comment, setComment] = useState("Este es un texto de ejemplo.");
+
+  // Estados para controlar las props del TextArea
+  const [isInvalidTextArea, setIsInvalidTextArea] = useState(false);
+  const [isDisabledTextArea, setIsDisabledTextArea] = useState(false);
+  const [isReadOnlyTextArea, setIsReadOnlyTextArea] = useState(false);
+  const [textAreaSize, setTextAreaSize] = useState<TextAreaSize>("md");
 
   return (
-    <ScrollView className="p-5 flex-1 flex flex-col ">
-      <View className="gap-4">
+    <ScrollView className="p-5 flex-1 flex flex-col   ">
+      <View className="gap-4 pb-40">
         <StatusBar style="light" />
 
         {/* --- BUTTON --- */}
@@ -406,19 +429,103 @@ export default function Index() {
         </Wrapper>
 
         <Wrapper label="Text Area">
-          <TextArea />
+          
+
+          {/* Componente TextArea en acción */}
+          <View className="bg-white rounded-lg p-4 shadow mb-4">
+            <TextArea
+              label="Tus comentarios"
+              placeholder="Escribe algo aquí..."
+              value={comment}
+              onChangeText={setComment}
+              size={textAreaSize}
+              isInvalid={isInvalidTextArea}
+              isDisabled={isDisabledTextArea}
+              readOnly={isReadOnlyTextArea}
+            />
+          </View>
+
+          {/* Controles para probar las variantes */}
+          <View className="bg-white rounded-lg p-4 shadow">
+            <Text className="font-semibold mb-2">Controles de Variante</Text>
+
+            {/* Control de Tamaño */}
+            <View className="flex-row items-center mb-2">
+              <Text className="mr-2">Tamaño</Text>
+              <Select
+                options={[
+                  { label: "Pequeño", value: "sm" },
+                  { label: "Mediano", value: "md" },
+                  { label: "Grande", value: "lg" },
+                ]}
+                value={textAreaSize}
+                placeholder="Seleccionar tamaño"
+                onChange={(value) => setTextAreaSize(value as TextAreaSize)}
+              />
+            </View>
+
+            {/* Control de Estado Inválido */}
+            <View className="flex-row items-center mb-2">
+              <Switch
+                label="Estado Inválido"
+                value={isInvalidTextArea}
+                onValueChange={setIsInvalidTextArea}
+                activeTrackColor="#EF4444"
+              />
+            </View>
+
+            {/* Control de Deshabilitado */}
+            <View className="flex-row items-center mb-2">
+              <Switch
+                label="Deshabilitado"
+                value={isDisabledTextArea}
+                onValueChange={setIsDisabledTextArea}
+              />
+            </View>
+
+            {/* Control de Solo Lectura */}
+            <View className="flex-row items-center">
+              <Switch
+                label="Solo Lectura"
+                value={isReadOnlyTextArea}
+                onValueChange={setIsReadOnlyTextArea}
+              />
+            </View>
+          </View>
         </Wrapper>
 
         <Wrapper label="Modal">
-          <Button className="my-5" onPress={() => setIsModalVisible(true)}>
-            <Text className="text-center">Show Modal</Text>
-          </Button>
+          <View>
+            <Text>Prueba de Modales</Text>
+          </View>
 
-          <CustomModal onClose={() => setIsModalVisible(false)} visible={isModalVisible}>
-            <Text className="text-center">Holita que tal</Text>
-            <Button variant="outline" className="my-2" onPress={() => setIsModalVisible(false)}>
-              <Text className="text-center text-black">Close Modal</Text>
+          <View className="gap-2 flex-row">
+            <Button className="flex-1" onPress={() => openModal("center")}>
+              <Text className="text-center">Centrado</Text>
             </Button>
+            <Button className="flex-1" onPress={() => openModal("bottom")}>
+              <Text className="text-center">Bottom Sheet</Text>
+            </Button>
+            <Button className="flex-1" onPress={() => openModal("full")}>
+              <Text className="text-center">Modal Completo</Text>
+            </Button>
+          </View>
+
+          <CustomModal
+            visible={modalVisible}
+            onClose={() => setModalVisible(false)}
+            variant={modalVariant}
+          >
+            <View>
+              <Text>Este es un modal {modalVariant}</Text>
+              <Text>
+                Puedes poner cualquier contenido que necesites aquí dentro. ¡Es
+                totalmente personalizable!
+              </Text>
+              <Button onPress={() => setModalVisible(false)}>
+                <Text>Cerrar</Text>
+              </Button>
+            </View>
           </CustomModal>
         </Wrapper>
       </View>
