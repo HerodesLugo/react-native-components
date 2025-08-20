@@ -1,6 +1,6 @@
 import Logo from "@/assets/images/react-logo.png"; // Import your logo image
-import Avatar from "@/components/avatar/Avatar";
-import Navbar from "@/components/navbar/Navbar";
+import Avatar from "@/components/ui/avatar/Avatar";
+import Navbar from "@/components/ui/navbar/Navbar";
 import { Stack } from "expo-router";
 import "../global.css";
 

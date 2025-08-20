@@ -1,8 +1,7 @@
 import React, { createContext, useContext } from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 import {
-    TabBarContainerProps,
-    TabBarContextProps,
+    TabBarContainerProps, TabBarContextProps,
     TabBarItemProps,
 } from "./types";
 
@@ -41,7 +40,7 @@ export const TabBarItem: React.FC<TabBarItemProps> = ({
     <TabBarContext.Provider value={{ isFocused }}>
       <TouchableOpacity
         onPress={onPress}
-        className="flex-1 items-center justify-center p-2"
+        className="flex-1 items-center justify-center "
         accessibilityRole="button"
         accessibilityState={isFocused ? { selected: true } : {}}
       >

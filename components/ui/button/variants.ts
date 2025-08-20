@@ -1,6 +1,6 @@
 const actionColors: Record<string, { bg: string; border: string; text?: string }> = {
-  primary: { bg: "bg-gray-500", border: "border-gray-500", text: "text-white" },
-  secondary: { bg: "bg-gray-200", border: "border-gray-200", text: "text-gray-800" },
+  primary: { bg: "bg-primary-100", border: "border-primary-100", text: "text-primary-100" },
+  secondary: { bg: "bg-secondary-100", border: "border-secondary-100", text: "text-secondary-100" },
   negative: { bg: "bg-red-600", border: "border-red-600", text: "text-white" },
   positive: { bg: "bg-green-600", border: "border-green-600", text: "text-white" },
 };

@@ -9,7 +9,6 @@ export interface TabBarItemProps {
   children: React.ReactNode;
 }
 
-
 // --- Componente TabBarContainer ---
 export interface TabBarContainerProps extends BottomTabBarProps {
   children: (props: {

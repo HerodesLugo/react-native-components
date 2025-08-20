@@ -11,9 +11,9 @@ interface WrapperProps {
 const Wrapper: React.FC<WrapperProps> = ({ children, className, label }) => {
   return (
     <View
-      className={`border border-gray-400 rounded-lg  p-2.5 justify-between ${className}`}
+      className={`border-2 border-indigo-600 rounded-lg  p-2.5 justify-between ${className}`}
     >
-      {label && <Text className="text-center text-gray-500 font-bold text-2xl">{label}</Text>}
+      {label && <Text className="text-center text-indigo-400 font-bold text-2xl">{label}</Text>}
       {children}
     </View>
   );

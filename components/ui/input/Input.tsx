@@ -17,7 +17,7 @@ const Input: FC<
   ...props
 }) => {
   
-  let inputClass = `${sizeClasses[size]} ${variantClasses[variant]} rounded text-gray-500 ${className}`;
+  let inputClass = `${sizeClasses[size]} ${variantClasses[variant]} rounded  ${className}`;
   if (invalid) inputClass += ` ${invalidClass}`;
   if (disabled) inputClass += ` ${disabledClass}`;
 
