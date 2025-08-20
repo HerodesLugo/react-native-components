@@ -15,6 +15,7 @@ import {
 import CustomModal from "@/components/ui/modal/CustomModal";
 import { ModalVariant } from "@/components/ui/modal/types";
 import ProgressBar from "@/components/ui/progressBar/ProgressBar";
+import { ProgressBarColor, ProgressBarSize } from "@/components/ui/progressBar/type";
 import RadioButton from "@/components/ui/radio/RadioButton";
 import { RadioButtonSize } from "@/components/ui/radio/types";
 import Select from "@/components/ui/select/Select";
@@ -56,9 +57,9 @@ export default function Index() {
 
   //Estado para progress
   const [progress, setProgress] = useState<string>("");
-  const [backgroundColor, setBackgroundColor] = useState<string>("");
-  const [borderRadius, setBorderRadius] = useState<string>("");
-  const [fillColor, setFillColor] = useState<string>("");
+  // Estado para variantes del ProgressBar
+  const [pbSize, setPbSize] = useState<ProgressBarSize>("md");
+  const [pbColor, setPbColor] = useState<ProgressBarColor>("primary");
 
   // Estado para los valores de los checkboxes
   const [checkedState, setCheckedState] = useState({
@@ -82,16 +83,9 @@ export default function Index() {
   // Estado para mostrar el Modal
   const [modalVisible, setModalVisible] = useState(false);
   const [modalVariant, setModalVariant] = useState<ModalVariant>("center");
-  const [backdropClass, setBackdropClass] = useState("bg-black/40");
 
   const openModal = (variant: ModalVariant) => {
     setModalVariant(variant);
-    // Cambiamos el fondo si es el bottom sheet para demostrar la funcionalidad
-    if (variant === "bottom") {
-      setBackdropClass("bg-blue-900/50");
-    } else {
-      setBackdropClass("bg-black/40");
-    }
     setModalVisible(true);
   };
 
@@ -204,6 +198,8 @@ export default function Index() {
             variant={inputVariant}
             size={inputSize}
             type={inputType}
+            color="error"
+            errorMessage="This field is required"
             invalid={inputVariant === "error"}
           />
         </Wrapper>
@@ -305,45 +301,54 @@ export default function Index() {
         <Wrapper label="Progress Bar" className="p-5 gap-4">
           <View className="flex flex-row gap-2">
             <Input
-              label="Progress"
-              placeholder="Enter progress percentage"
+              placeholder="0 - 100"
               value={progress}
               type="number"
               variant="outline"
               onChangeText={setProgress}
             />
-            <Input
-              label="Background Color"
-              placeholder="Enter background color"
-              value={backgroundColor}
-              onChangeText={setBackgroundColor}
-              variant="outline"
+
+            <Select
+              options={[
+                { label: "Small", value: "sm" },
+                { label: "Medium", value: "md" },
+                { label: "Large", value: "lg" },
+              ]}
+              value={pbSize}
+              placeholder="Size"
+              onChange={(value) => setPbSize(value as ProgressBarSize)}
+            />
+
+            <Select
+              options={[
+                { label: "Gray", value: "gray" },
+                { label: "Primary", value: "primary" },
+                { label: "Success", value: "success" },
+                { label: "Warning", value: "warning" },
+                { label: "Danger", value: "danger" },
+              ]}
+              value={pbColor}
+              placeholder="Color"
+              onChange={(value) => setPbColor(value as ProgressBarColor)}
             />
           </View>
-          <View className="flex flex-row gap-2">
-            <Input
-              label="Border Radius"
-              placeholder="Enter border radius"
-              variant="outline"
-              type="number"
-              value={borderRadius}
-              onChangeText={setBorderRadius}
+
+          <View className="flex flex-col gap-2">
+            <Text className="mb-2">Preview</Text>
+            <ProgressBar
+              progress={progress ? Math.max(0, Math.min(parseFloat(progress) / 100, 1)) : 0}
+              size={pbSize}
+              color={pbColor}
+              className="mb-3"
             />
-            <Input
-              label="Fill Color"
-              placeholder="Enter fill color"
-              variant="outline"
-              value={fillColor}
-              onChangeText={setFillColor}
-            />
+
+            <Text className="font-semibold">Examples</Text>
+            <View className="gap-5">
+              <ProgressBar progress={0.25} size="sm" color="primary" />
+              <ProgressBar progress={0.5} size="md" color="success" />
+              <ProgressBar progress={0.75} size="lg" color="warning" />
+            </View>
           </View>
-          <ProgressBar
-            backgroundColor={backgroundColor || "#e0e0e0"}
-            borderRadius={borderRadius ? parseFloat(borderRadius) : 8}
-            fillColor={fillColor || "#3b82f6"}
-            height={20}
-            progress={progress ? parseFloat(progress) : 0}
-          />
         </Wrapper>
 
         {/* --- SELECT --- */}
@@ -502,13 +507,13 @@ export default function Index() {
           </View>
 
           <View className="gap-2 flex-row">
-            <Button className="flex-1" onPress={() => openModal("center")}>
+            <Button className="flex-1" variant="outline" onPress={() => openModal("center")}>
               <Text className="text-center">Centrado</Text>
             </Button>
-            <Button className="flex-1" onPress={() => openModal("bottom")}>
+            <Button className="flex-1" variant="outline" onPress={() => openModal("bottom")}>
               <Text className="text-center">Bottom Sheet</Text>
             </Button>
-            <Button className="flex-1" onPress={() => openModal("full")}>
+            <Button className="flex-1" variant="outline" onPress={() => openModal("full")}>
               <Text className="text-center">Modal Completo</Text>
             </Button>
           </View>

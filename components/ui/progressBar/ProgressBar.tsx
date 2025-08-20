@@ -1,42 +1,24 @@
 import React from "react";
-import { StyleSheet, View } from "react-native";
+import { View } from "react-native";
 import { ProgressBarProps } from "./type";
+import { colorMap, sizeMap } from "./variants";
 
 const ProgressBar: React.FC<ProgressBarProps> = ({
-  progress,
-  height = 8,
-  backgroundColor = "#e0e0e0",
-  fillColor = "#3b82f6",
-  borderRadius = 4,
+  progress = 0,
+  size = "md",
+  color = "primary",
+  className = "",
 }) => {
+  const clamped = Math.max(0, Math.min(progress, 1));
+
+  const containerClasses = `w-full overflow-hidden rounded ${sizeMap[size] ?? sizeMap.md} ${className} bg-gray-200`;
+  const fillClasses = `${colorMap[color] ?? colorMap.primary} h-full`;
+
   return (
-    <View
-      style={[
-        styles.container,
-        {
-          height,
-          backgroundColor,
-          borderRadius,
-        },
-      ]}
-    >
-      <View
-        style={{
-          width: `${Math.max(0, Math.min(progress, 1)) * 100}%`,
-          height: "100%",
-          backgroundColor: fillColor,
-          borderRadius,
-        }}
-      />
+    <View className={containerClasses}>
+      <View className={fillClasses} style={{ width: `${clamped * 100}%` }} />
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    width: "100%",
-    overflow: "hidden",
-  },
-});
 
 export default ProgressBar;

@@ -12,5 +12,13 @@ export const variantClasses: Record<string, string> = {
   error: "bg-transparent border border-red-500",
 };
 
+export const colorClasses: Record<string, string> = {
+  primary: "border-primary-100",
+  success: "border-green-500",
+  warning: "border-yellow-500",
+  error: "border-red-500",
+  transparent: "border-transparent",
+};
+
 export const disabledClass = "bg-gray-100 border-gray-200 text-gray-400";
 export const invalidClass = "border-red-500  text-red-500";
