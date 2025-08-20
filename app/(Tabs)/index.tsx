@@ -98,17 +98,18 @@ export default function Index() {
   const [textAreaSize, setTextAreaSize] = useState<TextAreaSize>("md");
 
   return (
-    <ScrollView className="p-5 flex-1  bg-indigo-50 flex flex-col   ">
-    <View className="gap-4 pb-4">
+    <ScrollView className="flex-1 bg-indigo-50 p-4">
+      <View className="gap-4 pb-6">
+        
 
         {/* --- BUTTON --- */}
-        <Wrapper className="gap-4" label="Button">
-          <View className="flex flex-row">
+        <Wrapper label="Button">
+          <View className="flex-row items-center mb-3">
             <Text className="flex-1">Variant</Text>
             <Text className="flex-1">Action</Text>
             <Text className="flex-1">Size</Text>
           </View>
-          <View className="flex flex-row gap-1">
+          <View className="flex-row gap-2 mb-3">
             <Select
               options={[
                 { label: "Solid", value: "solid" },
@@ -116,7 +117,7 @@ export default function Index() {
                 { label: "Link", value: "link" },
               ]}
               value={buttonVariant}
-              placeholder="Select variant"
+              placeholder="Variant"
               onChange={(value) => setButtonVariant(value as ButtonVariant)}
             />
             <Select
@@ -127,18 +128,18 @@ export default function Index() {
                 { label: "Positive", value: "positive" },
               ]}
               value={buttonAction}
-              placeholder="Select action"
+              placeholder="Action"
               onChange={(value) => setButtonAction(value as ButtonAction)}
             />
             <Select
               options={[
-                { label: "Extra Small", value: "xs" },
-                { label: "Small", value: "sm" },
-                { label: "Medium", value: "md" },
-                { label: "Large", value: "lg" },
+                { label: "XS", value: "xs" },
+                { label: "SM", value: "sm" },
+                { label: "MD", value: "md" },
+                { label: "LG", value: "lg" },
               ]}
               value={buttonSize}
-              placeholder="Select size"
+              placeholder="Size"
               onChange={(value) => setButtonSize(value as ButtonSize)}
             />
           </View>
@@ -148,18 +149,18 @@ export default function Index() {
             size={buttonSize}
             onPress={() => alert("Button pressed!")}
           >
-            <Text className="text-center text-black">Hello World</Text>
+            <Text className="text-center text-white">Hello World</Text>
           </Button>
         </Wrapper>
 
         {/* --- INPUT --- */}
         <Wrapper label="Input">
-          <View className="flex-row my-2">
+          <View className="flex-row items-center mb-3">
             <Text className="flex-1">Variant</Text>
             <Text className="flex-1">Size</Text>
             <Text className="flex-1">Type</Text>
           </View>
-          <View className="flex flex-row gap-1 mb-2">
+          <View className="flex-row gap-2 mb-3">
             <Select
               options={[
                 { label: "Rounded", value: "rounded" },
@@ -168,18 +169,18 @@ export default function Index() {
                 { label: "Error", value: "error" },
               ]}
               value={inputVariant}
-              placeholder="Select variant"
+              placeholder="Variant"
               onChange={(value) => setInputVariant(value as InputVariant)}
             />
             <Select
               options={[
-                { label: "Extra Small", value: "xs" },
-                { label: "Small", value: "sm" },
-                { label: "Medium", value: "md" },
-                { label: "Large", value: "lg" },
+                { label: "XS", value: "xs" },
+                { label: "SM", value: "sm" },
+                { label: "MD", value: "md" },
+                { label: "LG", value: "lg" },
               ]}
               value={inputSize}
-              placeholder="Select size"
+              placeholder="Size"
               onChange={(value) => setInputSize(value as InputSize)}
             />
             <Select
@@ -188,7 +189,7 @@ export default function Index() {
                 { label: "Number", value: "number" },
               ]}
               value={inputType}
-              placeholder="Select Input Type"
+              placeholder="Type"
               onChange={(value) => setInputType(value as InputType)}
             />
           </View>
@@ -206,10 +207,8 @@ export default function Index() {
 
         {/* --- SWITCH --- */}
         <Wrapper label="Switch">
-          <View className="flex-row my-2">
+          <View className="flex-row items-center mb-3">
             <Text className="flex-1">Size</Text>
-          </View>
-          <View className="flex flex-row gap-1 mb-4">
             <Select
               options={[
                 { label: "Small", value: "sm" },
@@ -217,14 +216,14 @@ export default function Index() {
                 { label: "Large", value: "lg" },
               ]}
               value={switchSize}
-              placeholder="Select size"
+              placeholder="Size"
               onChange={(value) => setSwitchSize(value as SwitchSize)}
             />
           </View>
-          <View className="flex-row items-center justify-between bg-gray-100 rounded-md p-2">
+          <View className="flex-row items-center justify-between bg-gray-50 rounded-md p-3">
             <Text>Disable Switch</Text>
             <Switch
-              size="md" // Control switch should be a fixed size
+              size="md"
               value={switchDisabled}
               onValueChange={setSwitchDisabled}
             />
@@ -233,10 +232,8 @@ export default function Index() {
 
         {/* --- RADIO BUTTON --- */}
         <Wrapper label="Radio Button">
-          <View className="flex-row my-2">
+          <View className="flex-row items-center mb-3">
             <Text className="flex-1">Size</Text>
-          </View>
-          <View className="flex flex-row gap-1 mb-4">
             <Select
               options={[
                 { label: "Small", value: "sm" },
@@ -244,29 +241,31 @@ export default function Index() {
                 { label: "Large", value: "lg" },
               ]}
               value={radioSize}
-              placeholder="Select size"
+              placeholder="Size"
               onChange={(value) => setRadioSize(value as RadioButtonSize)}
             />
           </View>
-          <View className="flex-row items-center justify-between bg-gray-100 rounded-md p-2 mb-2">
-            <Text>Invalid State</Text>
-            <Switch
-              size="md"
-              value={radioInvalid}
-              onValueChange={setRadioInvalid}
-            />
-          </View>
-          <View className="flex-row items-center justify-between bg-gray-100 rounded-md p-2 mb-4">
-            <Text>Disable Group</Text>
-            <Switch
-              size="md"
-              value={radioDisabled}
-              onValueChange={setRadioDisabled}
-            />
+          <View className="space-y-2 mb-3">
+            <View className="flex-row items-center justify-between bg-gray-50 rounded-md p-3">
+              <Text>Invalid State</Text>
+              <Switch
+                size="md"
+                value={radioInvalid}
+                onValueChange={setRadioInvalid}
+              />
+            </View>
+            <View className="flex-row items-center justify-between bg-gray-50 rounded-md p-3">
+              <Text>Disable Group</Text>
+              <Switch
+                size="md"
+                value={radioDisabled}
+                onValueChange={setRadioDisabled}
+              />
+            </View>
           </View>
 
           {/* RadioButton Group */}
-          <View>
+          <View className="space-y-2">
             <RadioButton
               label="Manzana"
               value="apple"

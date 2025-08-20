@@ -1,6 +1,5 @@
 import React from "react";
 import { FlatList, Modal, Text, TouchableOpacity, View } from "react-native";
-import { stylesSelect } from "./styles";
 import { SelectContentProps } from "./types";
 
 export default function SelectContent({
@@ -8,8 +7,8 @@ export default function SelectContent({
   setVisible,
   options,
   onChange,
-  dropdownStyle,
-  optionStyle,
+  dropdownClassName = "",
+  optionClassName = "",
 }: SelectContentProps) {
   return (
     <Modal
@@ -19,22 +18,22 @@ export default function SelectContent({
       onRequestClose={() => setVisible(false)}
     >
       <TouchableOpacity
-        style={stylesSelect.overlay}
+        className="flex-1 justify-center items-center bg-black/20"
         onPress={() => setVisible(false)}
       >
-        <View style={[stylesSelect.dropdown, dropdownStyle]}>
+        <View className={`w-4/5 bg-white rounded-lg py-2 shadow ${dropdownClassName}`}>
           <FlatList
             data={options}
             keyExtractor={(item) => item.value.toString()}
             renderItem={({ item }) => (
               <TouchableOpacity
-                style={[stylesSelect.option, optionStyle]}
+                className={`px-4 py-3 border-b border-gray-100 ${optionClassName}`}
                 onPress={() => {
                   onChange(item.value);
                   setVisible(false);
                 }}
               >
-                <Text>{item.label}</Text>
+                <Text className="text-gray-700">{item.label}</Text>
               </TouchableOpacity>
             )}
           />

@@ -1,5 +1,3 @@
-import { TextStyle, ViewStyle } from "react-native";
-
 export interface SelectOption {
   label: string;
   value: string | number;
@@ -7,14 +5,16 @@ export interface SelectOption {
 
 export interface SelectProps {
   options: SelectOption[];
-  value: string | number;
+  value: string | number | undefined;
   onChange: (value: string | number) => void;
   placeholder?: string;
-  style?: ViewStyle;
-  dropdownStyle?: ViewStyle;
-  optionStyle?: ViewStyle ;
-  selectedOptionStyle?: ViewStyle;
-  labelStyle?: TextStyle;
+  // Tailwind classNames (NativeWind) to style elements
+  className?: string; // container
+  selectClassName?: string; // touchable select
+  dropdownClassName?: string;
+  optionClassName?: string;
+  selectedOptionClassName?: string;
+  labelClassName?: string;
 }
 
 export interface SelectContentProps {
@@ -22,6 +22,6 @@ export interface SelectContentProps {
   setVisible: (visible: boolean) => void;
   options: SelectOption[];
   onChange: (value: SelectOption["value"]) => void;
-  dropdownStyle?: ViewStyle ;
-  optionStyle?: ViewStyle ;
+  dropdownClassName?: string;
+  optionClassName?: string;
 }

@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 import SelectContent from "./SelectContent";
-import { stylesSelect } from "./styles";
 import { SelectProps } from "./types";
 
 const Select: React.FC<SelectProps> = ({
@@ -9,22 +8,23 @@ const Select: React.FC<SelectProps> = ({
   value,
   onChange,
   placeholder = "choose an option",
-  style = {},
-  dropdownStyle = {},
-  optionStyle = {},
-  selectedOptionStyle = {},
-  labelStyle = {},
+  className = "",
+  selectClassName = "",
+  dropdownClassName = "",
+  optionClassName = "",
+  selectedOptionClassName = "",
+  labelClassName = "",
 }) => {
   const [visible, setVisible] = useState(false);
   const selected = options.find((opt) => opt.value === value);
 
   return (
-    <View style={[stylesSelect.container, style]}>
+    <View className={`flex-1 ${className}`}>
       <TouchableOpacity
-        style={[stylesSelect.select, selectedOptionStyle]}
+        className={`px-3 py-2 border border-gray-300 rounded-md bg-white ${selectClassName} ${selectedOptionClassName}`}
         onPress={() => setVisible(true)}
       >
-        <Text style={[stylesSelect.label, labelStyle]}>
+        <Text className={`text-gray-700 ${labelClassName}`}>
           {selected ? selected.label : placeholder}
         </Text>
       </TouchableOpacity>
@@ -34,8 +34,8 @@ const Select: React.FC<SelectProps> = ({
         visible={visible}
         setVisible={setVisible}
         options={options}
-        dropdownStyle={dropdownStyle}
-        optionStyle={optionStyle}
+        dropdownClassName={dropdownClassName}
+        optionClassName={optionClassName}
       />
     </View>
   );
