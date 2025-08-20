@@ -1,12 +1,14 @@
+import Navbar from "@/components/navbar/navbar";
 import { Stack } from "expo-router";
 import "../global.css";
 
 export default function RootLayout() {
   return (
-    <Stack    
+    <Stack
       screenOptions={{
-        headerTitle: "Components",
-        headerStyle: { backgroundColor: "#C9C4C1" },}}>      
+        header: () => <Navbar />,
+      }}
+    >
       <Stack.Screen name="home" />
     </Stack>
   );

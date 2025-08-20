@@ -1,0 +1,427 @@
+<!-- <View className="gap-4 pb-40">
+        <StatusBar style="light" />
+
+        {/* --- BUTTON --- */}
+        <Wrapper className="gap-4" label="Button">
+          <View className="flex flex-row">
+            <Text className="flex-1">Variant</Text>
+            <Text className="flex-1">Action</Text>
+            <Text className="flex-1">Size</Text>
+          </View>
+          <View className="flex flex-row gap-1">
+            <Select
+              options={[
+                { label: "Solid", value: "solid" },
+                { label: "Outline", value: "outline" },
+                { label: "Link", value: "link" },
+              ]}
+              value={buttonVariant}
+              placeholder="Select variant"
+              onChange={(value) => setButtonVariant(value as ButtonVariant)}
+            />
+            <Select
+              options={[
+                { label: "Primary", value: "primary" },
+                { label: "Secondary", value: "secondary" },
+                { label: "Negative", value: "negative" },
+                { label: "Positive", value: "positive" },
+              ]}
+              value={buttonAction}
+              placeholder="Select action"
+              onChange={(value) => setButtonAction(value as ButtonAction)}
+            />
+            <Select
+              options={[
+                { label: "Extra Small", value: "xs" },
+                { label: "Small", value: "sm" },
+                { label: "Medium", value: "md" },
+                { label: "Large", value: "lg" },
+              ]}
+              value={buttonSize}
+              placeholder="Select size"
+              onChange={(value) => setButtonSize(value as ButtonSize)}
+            />
+          </View>
+          <Button
+            variant={buttonVariant}
+            action={buttonAction}
+            size={buttonSize}
+            onPress={() => alert("Button pressed!")}
+          >
+            <Text className="text-center text-black">Hello World</Text>
+          </Button>
+        </Wrapper>
+
+        {/* --- INPUT --- */}
+        <Wrapper label="Input">
+          <View className="flex-row my-2">
+            <Text className="flex-1">Variant</Text>
+            <Text className="flex-1">Size</Text>
+            <Text className="flex-1">Type</Text>
+          </View>
+          <View className="flex flex-row gap-1 mb-2">
+            <Select
+              options={[
+                { label: "Rounded", value: "rounded" },
+                { label: "Outline", value: "outline" },
+                { label: "Underlined", value: "underlined" },
+                { label: "Error", value: "error" },
+              ]}
+              value={inputVariant}
+              placeholder="Select variant"
+              onChange={(value) => setInputVariant(value as InputVariant)}
+            />
+            <Select
+              options={[
+                { label: "Extra Small", value: "xs" },
+                { label: "Small", value: "sm" },
+                { label: "Medium", value: "md" },
+                { label: "Large", value: "lg" },
+              ]}
+              value={inputSize}
+              placeholder="Select size"
+              onChange={(value) => setInputSize(value as InputSize)}
+            />
+            <Select
+              options={[
+                { label: "Text", value: "text" },
+                { label: "Number", value: "number" },
+              ]}
+              value={inputType}
+              placeholder="Select Input Type"
+              onChange={(value) => setInputType(value as InputType)}
+            />
+          </View>
+          <Input
+            label="Hello World"
+            placeholder="Enter Text here..."
+            variant={inputVariant}
+            size={inputSize}
+            type={inputType}
+            invalid={inputVariant === "error"}
+          />
+        </Wrapper>
+
+        {/* --- SWITCH --- */}
+        <Wrapper label="Switch">
+          <View className="flex-row my-2">
+            <Text className="flex-1">Size</Text>
+          </View>
+          <View className="flex flex-row gap-1 mb-4">
+            <Select
+              options={[
+                { label: "Small", value: "sm" },
+                { label: "Medium", value: "md" },
+                { label: "Large", value: "lg" },
+              ]}
+              value={switchSize}
+              placeholder="Select size"
+              onChange={(value) => setSwitchSize(value as SwitchSize)}
+            />
+          </View>
+          <View className="flex-row items-center justify-between bg-gray-100 rounded-md p-2">
+            <Text>Disable Switch</Text>
+            <Switch
+              size="md" // Control switch should be a fixed size
+              value={switchDisabled}
+              onValueChange={setSwitchDisabled}
+            />
+          </View>
+        </Wrapper>
+
+        {/* --- RADIO BUTTON --- */}
+        <Wrapper label="Radio Button">
+          <View className="flex-row my-2">
+            <Text className="flex-1">Size</Text>
+          </View>
+          <View className="flex flex-row gap-1 mb-4">
+            <Select
+              options={[
+                { label: "Small", value: "sm" },
+                { label: "Medium", value: "md" },
+                { label: "Large", value: "lg" },
+              ]}
+              value={radioSize}
+              placeholder="Select size"
+              onChange={(value) => setRadioSize(value as RadioButtonSize)}
+            />
+          </View>
+          <View className="flex-row items-center justify-between bg-gray-100 rounded-md p-2 mb-2">
+            <Text>Invalid State</Text>
+            <Switch
+              size="md"
+              value={radioInvalid}
+              onValueChange={setRadioInvalid}
+            />
+          </View>
+          <View className="flex-row items-center justify-between bg-gray-100 rounded-md p-2 mb-4">
+            <Text>Disable Group</Text>
+            <Switch
+              size="md"
+              value={radioDisabled}
+              onValueChange={setRadioDisabled}
+            />
+          </View>
+
+          {/* RadioButton Group */}
+          <View>
+            <RadioButton
+              label="Manzana"
+              value="apple"
+              selectedValue={selectedValue}
+              onSelect={setSelectedValue}
+              size={radioSize}
+              invalid={radioInvalid}
+              disabled={radioDisabled}
+            />
+            <RadioButton
+              label="Naranja"
+              value="orange"
+              selectedValue={selectedValue}
+              onSelect={setSelectedValue}
+              size={radioSize}
+              invalid={radioInvalid}
+              disabled={radioDisabled}
+            />
+            <RadioButton
+              label="Banana"
+              value="banana"
+              selectedValue={selectedValue}
+              onSelect={setSelectedValue}
+              size={radioSize}
+              invalid={radioInvalid}
+              disabled={radioDisabled}
+            />
+          </View>
+        </Wrapper>
+
+        {/* --- PROGRESS BAR --- */}
+        <Wrapper label="Progress Bar" className="p-5 gap-4">
+          <View className="flex flex-row gap-2">
+            <Input
+              label="Progress"
+              placeholder="Enter progress percentage"
+              value={progress}
+              type="number"
+              variant="outline"
+              onChangeText={setProgress}
+            />
+            <Input
+              label="Background Color"
+              placeholder="Enter background color"
+              value={backgroundColor}
+              onChangeText={setBackgroundColor}
+              variant="outline"
+            />
+          </View>
+          <View className="flex flex-row gap-2">
+            <Input
+              label="Border Radius"
+              placeholder="Enter border radius"
+              variant="outline"
+              type="number"
+              value={borderRadius}
+              onChangeText={setBorderRadius}
+            />
+            <Input
+              label="Fill Color"
+              placeholder="Enter fill color"
+              variant="outline"
+              value={fillColor}
+              onChangeText={setFillColor}
+            />
+          </View>
+          <ProgressBar
+            backgroundColor={backgroundColor || "#e0e0e0"}
+            borderRadius={borderRadius ? parseFloat(borderRadius) : 8}
+            fillColor={fillColor || "#3b82f6"}
+            height={20}
+            progress={progress ? parseFloat(progress) : 0}
+          />
+        </Wrapper>
+
+        {/* --- SELECT --- */}
+        <Wrapper label="Select">
+          <Select
+            options={[
+              { label: "Option 1", value: "option1" },
+              { label: "Option 2", value: "option2" },
+              { label: "Option 3", value: "option3" },
+            ]}
+            value=""
+            placeholder="Select an option"
+            onChange={(value) => alert(`Selected: ${value}`)}
+          />
+        </Wrapper>
+
+        {/* --- SLIDER --- */}
+        <Wrapper label="Slider">
+          <CustomSlider
+            height={20}
+            minimumValue={0}
+            maximumValue={100}
+            minimumTrackTintColor="#c11c1c"
+            maximumTrackTintColor="#513636"
+            thumbTintColor="#0000FF"
+          />
+        </Wrapper>
+
+        <Wrapper label="Checkbox">
+          {/* Grupo de Checkboxes */}
+
+          <View>
+            <Text>Tus suscripciones</Text>
+            {PREFERENCES.map((item) => (
+              <Checkbox
+                key={item.id}
+                label={item.label}
+                value={checkedState[item.id as keyof typeof checkedState]}
+                onValueChange={(newValue) =>
+                  handleCheckboxChange(item.id, newValue)
+                }
+                size={checkboxSize}
+                invalid={isInvalid}
+                disabled={isDisabled}
+              />
+            ))}
+          </View>
+
+          {/* Controles para probar las variantes */}
+          <View className="my-4">
+            <Text>Controles de Variante</Text>
+
+            {/* Control de Tamaño */}
+            <View className="my-2">
+              <Text>Tamaño</Text>
+              <Select
+                options={[
+                  { label: "Pequeño", value: "sm" },
+                  { label: "Mediano", value: "md" },
+                  { label: "Grande", value: "lg" },
+                ]}
+                value={checkboxSize}
+                placeholder="Seleccionar tamaño"
+                onChange={(value) => setCheckboxSize(value as CheckboxSize)}
+              />
+            </View>
+
+            <View>
+              <Switch
+                label="Estado Inválido"
+                value={isInvalid}
+                onValueChange={setIsInvalid}
+                activeTrackColor="#EF4444"
+              />
+            </View>
+
+            <View className="my-2">
+              <Switch
+                label="Deshabilitar Grupo"
+                value={isDisabled}
+                onValueChange={setIsDisabled}
+              />
+            </View>
+          </View>
+        </Wrapper>
+
+        <Wrapper label="Text Area">
+          
+
+          {/* Componente TextArea en acción */}
+          <View className="bg-white rounded-lg p-4 shadow mb-4">
+            <TextArea
+              label="Tus comentarios"
+              placeholder="Escribe algo aquí..."
+              value={comment}
+              onChangeText={setComment}
+              size={textAreaSize}
+              isInvalid={isInvalidTextArea}
+              isDisabled={isDisabledTextArea}
+              readOnly={isReadOnlyTextArea}
+            />
+          </View>
+
+          {/* Controles para probar las variantes */}
+          <View className="bg-white rounded-lg p-4 shadow">
+            <Text className="font-semibold mb-2">Controles de Variante</Text>
+
+            {/* Control de Tamaño */}
+            <View className="flex-row items-center mb-2">
+              <Text className="mr-2">Tamaño</Text>
+              <Select
+                options={[
+                  { label: "Pequeño", value: "sm" },
+                  { label: "Mediano", value: "md" },
+                  { label: "Grande", value: "lg" },
+                ]}
+                value={textAreaSize}
+                placeholder="Seleccionar tamaño"
+                onChange={(value) => setTextAreaSize(value as TextAreaSize)}
+              />
+            </View>
+
+            {/* Control de Estado Inválido */}
+            <View className="flex-row items-center mb-2">
+              <Switch
+                label="Estado Inválido"
+                value={isInvalidTextArea}
+                onValueChange={setIsInvalidTextArea}
+                activeTrackColor="#EF4444"
+              />
+            </View>
+
+            {/* Control de Deshabilitado */}
+            <View className="flex-row items-center mb-2">
+              <Switch
+                label="Deshabilitado"
+                value={isDisabledTextArea}
+                onValueChange={setIsDisabledTextArea}
+              />
+            </View>
+
+            {/* Control de Solo Lectura */}
+            <View className="flex-row items-center">
+              <Switch
+                label="Solo Lectura"
+                value={isReadOnlyTextArea}
+                onValueChange={setIsReadOnlyTextArea}
+              />
+            </View>
+          </View>
+        </Wrapper>
+
+        <Wrapper label="Modal">
+          <View>
+            <Text>Prueba de Modales</Text>
+          </View>
+
+          <View className="gap-2 flex-row">
+            <Button className="flex-1" onPress={() => openModal("center")}>
+              <Text className="text-center">Centrado</Text>
+            </Button>
+            <Button className="flex-1" onPress={() => openModal("bottom")}>
+              <Text className="text-center">Bottom Sheet</Text>
+            </Button>
+            <Button className="flex-1" onPress={() => openModal("full")}>
+              <Text className="text-center">Modal Completo</Text>
+            </Button>
+          </View>
+
+          <CustomModal
+            visible={modalVisible}
+            onClose={() => setModalVisible(false)}
+            variant={modalVariant}
+          >
+            <View>
+              <Text>Este es un modal {modalVariant}</Text>
+              <Text>
+                Puedes poner cualquier contenido que necesites aquí dentro. ¡Es
+                totalmente personalizable!
+              </Text>
+              <Button onPress={() => setModalVisible(false)}>
+                <Text>Cerrar</Text>
+              </Button>
+            </View>
+          </CustomModal>
+        </Wrapper>
+      </View> -->
