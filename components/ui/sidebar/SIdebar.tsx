@@ -1,17 +1,13 @@
 // components/drawer/Drawer.tsx
 
-import { DrawerContentComponentProps } from "@react-navigation/drawer";
 import { Link, usePathname } from "expo-router";
 import React from "react";
 import { ScrollView, TouchableOpacity, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { DrawerContainerProps, DrawerItemProps } from "./types";
 
 // --- Contenedor Principal ---
-interface DrawerContainerProps extends DrawerContentComponentProps {
-  children: React.ReactNode;
-  containerClassName?: string;
-  orientation?: "vertical" | "horizontal";
-}
+
 const Container: React.FC<DrawerContainerProps> = ({
   children,
   containerClassName = "bg-gray-800",
@@ -61,14 +57,7 @@ const Footer = ({
   </View>
 );
 
-// --- Item del Menú ---
-interface DrawerItemProps {
-  href: string;
-  children: React.ReactNode;
-  icon?: React.ReactNode;
-  className?: string;
-  activeClassName?: string;
-}
+
 const Item: React.FC<DrawerItemProps> = ({
   href,
   children,
