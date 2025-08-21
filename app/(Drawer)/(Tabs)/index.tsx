@@ -15,11 +15,15 @@ import {
 import CustomModal from "@/components/ui/modal/CustomModal";
 import { ModalVariant } from "@/components/ui/modal/types";
 import ProgressBar from "@/components/ui/progressBar/ProgressBar";
-import { ProgressBarColor, ProgressBarSize } from "@/components/ui/progressBar/type";
+import {
+  ProgressBarColor,
+  ProgressBarSize,
+} from "@/components/ui/progressBar/type";
 import RadioButton from "@/components/ui/radio/RadioButton";
 import { RadioButtonSize } from "@/components/ui/radio/types";
 import Select from "@/components/ui/select/Select";
 import CustomSlider from "@/components/ui/slider/Slider";
+import Spinner from "@/components/ui/spinner/Spinner";
 import Switch from "@/components/ui/switch/Switch";
 import { SwitchSize } from "@/components/ui/switch/types";
 import TextArea from "@/components/ui/textArea/TextArea";
@@ -100,8 +104,6 @@ export default function Index() {
   return (
     <ScrollView className="flex-1 bg-indigo-50 p-4">
       <View className="gap-4 pb-6">
-        
-
         {/* --- BUTTON --- */}
         <Wrapper label="Button">
           <View className="flex-row items-center mb-3">
@@ -335,7 +337,11 @@ export default function Index() {
           <View className="flex flex-col gap-2">
             <Text className="mb-2">Preview</Text>
             <ProgressBar
-              progress={progress ? Math.max(0, Math.min(parseFloat(progress) / 100, 1)) : 0}
+              progress={
+                progress
+                  ? Math.max(0, Math.min(parseFloat(progress) / 100, 1))
+                  : 0
+              }
               size={pbSize}
               color={pbColor}
               className="mb-3"
@@ -346,6 +352,30 @@ export default function Index() {
               <ProgressBar progress={0.25} size="sm" color="primary" />
               <ProgressBar progress={0.5} size="md" color="success" />
               <ProgressBar progress={0.75} size="lg" color="warning" />
+            </View>
+          </View>
+        </Wrapper>
+
+        {/* --- SPINNER --- */}
+        <Wrapper label="Spinner">
+          <View className="mb-3">
+            <Text className="mb-2">Sizes</Text>
+            <View className="flex-row items-center gap-4">
+              <Spinner size="xs" />
+              <Spinner size="sm" />
+              <Spinner size="md" />
+              <Spinner size="lg" />
+            </View>
+          </View>
+
+          <View>
+            <Text className="mb-2">Colors</Text>
+            <View className="flex-row items-center gap-4">
+              <Spinner color="primary" />
+              <Spinner color="secondary" />
+              <Spinner color="positive" />
+              <Spinner color="error" />
+              <Spinner color="neutral" />
             </View>
           </View>
         </Wrapper>
@@ -435,8 +465,6 @@ export default function Index() {
         </Wrapper>
 
         <Wrapper label="Text Area">
-          
-
           {/* Componente TextArea en acción */}
           <View className="bg-white rounded-lg p-4 shadow mb-4">
             <TextArea
@@ -506,13 +534,25 @@ export default function Index() {
           </View>
 
           <View className="gap-2 flex-row">
-            <Button className="flex-1" variant="outline" onPress={() => openModal("center")}>
+            <Button
+              className="flex-1"
+              variant="outline"
+              onPress={() => openModal("center")}
+            >
               <Text className="text-center">Centrado</Text>
             </Button>
-            <Button className="flex-1" variant="outline" onPress={() => openModal("bottom")}>
+            <Button
+              className="flex-1"
+              variant="outline"
+              onPress={() => openModal("bottom")}
+            >
               <Text className="text-center">Bottom Sheet</Text>
             </Button>
-            <Button className="flex-1" variant="outline" onPress={() => openModal("full")}>
+            <Button
+              className="flex-1"
+              variant="outline"
+              onPress={() => openModal("full")}
+            >
               <Text className="text-center">Modal Completo</Text>
             </Button>
           </View>
@@ -534,7 +574,7 @@ export default function Index() {
             </View>
           </CustomModal>
         </Wrapper>
-      </View> 
+      </View>
     </ScrollView>
   );
 }
