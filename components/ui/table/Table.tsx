@@ -22,15 +22,15 @@ const Table = <T,>({
   pagination,
   ...props
 }: TableProps<T>) => {
-  const sc = sizeClasses[size];
+  const sizeClassesMap = sizeClasses[size];
 
   // selection state (controlled or uncontrolled)
-  const [internalSelected, setInternalSelected] = useState<string[]>([]);
-  const selectedIds = controlledSelectedIds ?? internalSelected;
+  const [internalSelectedIds, setInternalSelectedIds] = useState<string[]>([]);
+  const selectedIds = controlledSelectedIds ?? internalSelectedIds;
 
-  const setSelected = (ids: string[]) => {
+  const updateSelectedIds = (ids: string[]) => {
     if (controlledSelectedIds) onSelectionChange?.(ids);
-    else setInternalSelected(ids);
+    else setInternalSelectedIds(ids);
   };
 
   const getRowKey = (row: T, index: number) => {
@@ -43,34 +43,35 @@ const Table = <T,>({
   const { sortedData, sortKey, sortDir, onSortChange } = useSorting(data, sortable);
 
   const pageSize = pagination?.pageSize ?? 0;
-  const { page, pagedData, totalPages, goNext, goPrev } = usePagination(
-    sortedData,
-    pageSize
-  );
+  const {
+    page: currentPage,
+    pagedData: currentPageData,
+    totalPages,
+    goNext: goToNextPage,
+    goPrev: goToPrevPage,
+  } = usePagination(sortedData, pageSize);
 
   const toggleSelect = (id: string) => {
     const exists = selectedIds.includes(id);
-    const next = exists
-      ? selectedIds.filter((x) => x !== id)
-      : [...selectedIds, id];
-    setSelected(next);
+  const next = exists ? selectedIds.filter((x) => x !== id) : [...selectedIds, id];
+  updateSelectedIds(next);
   };
 
-  const handleToggleAll = (v: boolean) => {
-    if (v) setSelected(data.map((_, i) => getRowKey(data[i], i)));
-    else setSelected([]);
+  const handleToggleAll = (shouldSelectAll: boolean) => {
+    if (shouldSelectAll) updateSelectedIds(data.map((_, i) => getRowKey(data[i], i)));
+    else updateSelectedIds([]);
   };
 
-  const renderRow = ({ item, index }: { item: T; index: number }) => (
+  const renderTableRow = ({ item: row, index: rowIndex }: { item: T; index: number }) => (
     <Row
-      item={item}
-      index={index}
+      item={row}
+      index={rowIndex}
       columns={columns}
       selectable={selectable}
-      isSelected={selectedIds.includes(getRowKey(item, index))}
+      isSelected={selectedIds.includes(getRowKey(row, rowIndex))}
       onToggleSelect={toggleSelect}
       getRowKey={getRowKey}
-      sizeClasses={sc}
+      sizeClasses={sizeClassesMap}
       onRowPress={onRowPress}
     />
   );
@@ -88,22 +89,22 @@ const Table = <T,>({
             sortKey={sortKey}
             sortDir={sortDir}
             onSortChange={onSortChange}
-            sizeClasses={sc}
+            sizeClasses={sizeClassesMap}
           />
           <FlatList
-            data={pagedData}
-            renderItem={renderRow}
-            keyExtractor={(item, idx) => getRowKey(item, idx)}
+            data={currentPageData}
+            renderItem={renderTableRow}
+            keyExtractor={(row, rowIndex) => getRowKey(row, rowIndex)}
           />
         </View>
       </ScrollView>
 
       {pageSize ? (
         <Pagination
-          page={page}
+          page={currentPage}
           totalPages={totalPages}
-          onPrev={goPrev}
-          onNext={goNext}
+          onPrev={goToPrevPage}
+          onNext={goToNextPage}
         />
       ) : null}
     </View>
