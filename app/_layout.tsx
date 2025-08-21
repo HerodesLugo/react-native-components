@@ -8,6 +8,7 @@ export default function RootLayout() {
   return (
     <Stack
       screenOptions={{
+        headerShown: false,
         header: () => (
           <Navbar
             left={{

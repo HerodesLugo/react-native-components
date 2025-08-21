@@ -1,8 +1,8 @@
 import {
-    TabBarBadge,
-    TabBarContainer,
-    TabBarIcon,
-    TabBarLabel,
+  TabBarBadge,
+  TabBarContainer,
+  TabBarIcon,
+  TabBarLabel,
 } from "@/components/ui/tabs/TabBar";
 import { Ionicons } from "@expo/vector-icons";
 import { Tabs } from "expo-router";
@@ -19,7 +19,6 @@ export default function TabsLayout() {
           {({ descriptor, isFocused }) => {
             const { options } = descriptor;
             const iconColor = isFocused ? "white" : "#C7D2FE"; // indigo-200
-            console.log(options, 'options');
             return (
               <View className={`flex-row items-center  p-3 ${isFocused ? "border-t-2 border-t-white " : ""}`}>
                 <TabBarIcon>
