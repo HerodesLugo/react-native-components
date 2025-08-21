@@ -1,3 +1,4 @@
+import Accordion from "@/components/ui/accordion/Accordion";
 import Button from "@/components/ui/button/Button";
 import {
   ButtonAction,
@@ -153,6 +154,32 @@ export default function Index() {
           >
             <Text className="text-center text-white">Hello World</Text>
           </Button>
+        </Wrapper>
+
+        {/* --- ACCORDION --- */}
+        <Wrapper label="Accordion">
+          <Text className="mb-2">Single (only one open)</Text>
+          <Accordion type="single" size="md" className="mb-4">
+            <Accordion.Item id="s1" title="Item 1">
+              <Text>Contenido del item 1</Text>
+            </Accordion.Item>
+            <Accordion.Item id="s2" title="Item 2">
+              <Text>Contenido del item 2</Text>
+            </Accordion.Item>
+            <Accordion.Item id="s3" title="Item 3">
+              <Text>Contenido del item 3</Text>
+            </Accordion.Item>
+          </Accordion>
+
+          <Text className="mb-2">Multiple (several open)</Text>
+          <Accordion  type="multiple" size="sm">
+            <Accordion.Item id="m1" title="Item A">
+              <Text>Contenido A</Text>
+            </Accordion.Item>
+            <Accordion.Item id="m2" title="Item B">
+              <Text>Contenido B</Text>
+            </Accordion.Item>
+          </Accordion>
         </Wrapper>
 
         {/* --- INPUT --- */}
