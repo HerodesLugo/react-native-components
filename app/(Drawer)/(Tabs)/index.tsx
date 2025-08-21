@@ -27,6 +27,7 @@ import CustomSlider from "@/components/ui/slider/Slider";
 import Spinner from "@/components/ui/spinner/Spinner";
 import Switch from "@/components/ui/switch/Switch";
 import { SwitchSize } from "@/components/ui/switch/types";
+import Table from "@/components/ui/table/Table";
 import TextArea from "@/components/ui/textArea/TextArea";
 import { TextAreaSize } from "@/components/ui/textArea/types";
 import Wrapper from "@/components/ui/Wrapper";
@@ -102,6 +103,22 @@ export default function Index() {
   const [isReadOnlyTextArea, setIsReadOnlyTextArea] = useState(false);
   const [textAreaSize, setTextAreaSize] = useState<TextAreaSize>("md");
 
+  // --- Table example data & columns ---
+  const tableColumns = [
+    { key: "name", title: "Name", sortable: true },
+    { key: "email", title: "Email", sortable: true },
+    { key: "role", title: "Role" },
+  ];
+
+  const tableData = [
+    { id: "1", name: "Alice", email: "alice@example.com", role: "Admin" },
+    { id: "2", name: "Bob", email: "bob@example.com", role: "Editor" },
+    { id: "3", name: "Carol", email: "carol@example.com", role: "Viewer" },
+    { id: "4", name: "Dave", email: "dave@example.com", role: "Editor" },
+    { id: "5", name: "Eve", email: "eve@example.com", role: "Admin" },
+    { id: "6", name: "Frank", email: "frank@example.com", role: "Viewer" },
+  ];
+
   return (
     <ScrollView className="flex-1 bg-indigo-50 p-4">
       <View className="gap-4 pb-6">
@@ -172,7 +189,7 @@ export default function Index() {
           </Accordion>
 
           <Text className="mb-2">Multiple (several open)</Text>
-          <Accordion  type="multiple" size="sm">
+          <Accordion type="multiple" size="sm">
             <Accordion.Item id="m1" title="Item A">
               <Text>Contenido A</Text>
             </Accordion.Item>
@@ -405,6 +422,17 @@ export default function Index() {
               <Spinner color="neutral" />
             </View>
           </View>
+        </Wrapper>
+
+        {/* --- TABLE --- */}
+        <Wrapper label="Table" className="p-4">
+          <Table
+            columns={tableColumns}
+            data={tableData}
+            size="sm"            
+            sortable
+            rowKey="id"
+          />
         </Wrapper>
 
         {/* --- SELECT --- */}
