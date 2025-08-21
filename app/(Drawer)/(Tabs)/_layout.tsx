@@ -9,7 +9,7 @@ import { Tabs } from "expo-router";
 import { View } from "react-native";
 export default function TabsLayout() {
   return (
-    <Tabs        
+    <Tabs
       tabBar={(props) => (
         <TabBarContainer
           {...props}
@@ -19,7 +19,9 @@ export default function TabsLayout() {
             const { options } = descriptor;
             const iconColor = isFocused ? "white" : "#C7D2FE"; // indigo-200
             return (
-              <View className={`flex-row items-center  p-3 ${isFocused ? "border-t-2 border-t-white " : ""}`}>
+              <View
+                className={`flex-row items-center  p-3 ${isFocused ? "border-t-2 border-t-white " : ""}`}
+              >
                 <TabBarIcon>
                   {options.tabBarIcon &&
                     options.tabBarIcon({
@@ -33,7 +35,7 @@ export default function TabsLayout() {
                     ? options.tabBarLabel
                     : options.title}
                 </TabBarLabel>
-                <TabBarBadge   count={options.tabBarBadge as number} />
+                <TabBarBadge count={options.tabBarBadge as number} />
               </View>
             );
           }}
@@ -47,7 +49,11 @@ export default function TabsLayout() {
           title: "Home",
           tabBarLabel: "Home",
           tabBarIcon: ({ color, size, focused }) => (
-            <Ionicons name={focused ? "home" : "home-outline"} size={size} color={color} />
+            <Ionicons
+              name={focused ? "home" : "home-outline"}
+              size={size}
+              color={color}
+            />
           ),
         }}
       />
@@ -60,7 +66,11 @@ export default function TabsLayout() {
           tabBarBadge: 2,
 
           tabBarIcon: ({ color, size, focused }) => (
-            <Ionicons name={focused ? "chatbubble" : "chatbubble-outline"} size={size} color={color} />
+            <Ionicons
+              name={focused ? "chatbubble" : "chatbubble-outline"}
+              size={size}
+              color={color}
+            />
           ),
         }}
       />
