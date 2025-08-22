@@ -1,4 +1,5 @@
 import Chat from "@/components/chat/Chat";
+import Badge from "@/components/ui/badge/Badge";
 import Input from "@/components/ui/input/Input";
 import { EvilIcons } from "@expo/vector-icons";
 import React from "react";
@@ -20,12 +21,29 @@ const TabsScreen = () => {
           size="sm"
         />
       </View>
-      {/* <View className="border rounded-full p-2 ">
-        <Text>Badges</Text>
-      </View> */}
+      <View className=" p-2 my-2 flex-row gap-2">
+        <Badge size="lg" color="neutral">
+          All
+        </Badge>
+        <Badge size="lg" color="neutral">
+          Unread
+        </Badge>
+        <Badge size="lg" color="neutral">
+          Favourites
+        </Badge>
+        <Badge size="lg" color="neutral">
+          Groups
+        </Badge>
+
+        <Badge size="lg" color="neutral">
+          +
+        </Badge>
+      </View>
+
       <View className="py-2 justify-center">
         <Text className="text-lg font-bold">Archived</Text>
       </View>
+
       <Chat />
       <Chat />
       <Chat />

@@ -6,27 +6,24 @@ import {
 } from "@/components/ui/tabs/TabBar";
 import { Ionicons } from "@expo/vector-icons";
 import { Tabs } from "expo-router";
-import { View } from "react-native";
 export default function TabsLayout() {
   return (
     <Tabs
       tabBar={(props) => (
         <TabBarContainer
           {...props}
-          containerClassName="flex flex-row bg-indigo-700 pb-4"
+          containerClassName="flex flex-row justify-between  bg-[#FOFEFE] pb-6 px-4 pt-2"
         >
           {({ descriptor, isFocused }) => {
             const { options } = descriptor;
-            const iconColor = isFocused ? "white" : "#C7D2FE"; // indigo-200
+            const iconColor = isFocused ? "black" : "#C7D2FE"; // indigo-200
             return (
-              <View
-                className={`flex-row items-center  p-3 ${isFocused ? "border-t-2 border-t-white " : ""}`}
-              >
+              <>
                 <TabBarIcon>
                   {options.tabBarIcon &&
                     options.tabBarIcon({
                       color: iconColor,
-                      size: 24,
+                      size:24,
                       focused: isFocused,
                     })}
                 </TabBarIcon>
@@ -36,7 +33,7 @@ export default function TabsLayout() {
                     : options.title}
                 </TabBarLabel>
                 <TabBarBadge count={options.tabBarBadge as number} />
-              </View>
+              </>
             );
           }}
         </TabBarContainer>
@@ -46,8 +43,22 @@ export default function TabsLayout() {
       <Tabs.Screen
         name="index"
         options={{
-          title: "Home",
-          tabBarLabel: "Home",
+          title: "Chats",
+          tabBarLabel: "Chats",
+          tabBarIcon: ({ color, size, focused }) => (
+            <Ionicons
+              name={focused ? "home" : "home-outline"}
+              size={size}
+              color={color}
+            />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="updates"
+        options={{
+          title: "Updates",
+          tabBarLabel: "Updates",
           tabBarIcon: ({ color, size, focused }) => (
             <Ionicons
               name={focused ? "home" : "home-outline"}
@@ -58,7 +69,34 @@ export default function TabsLayout() {
         }}
       />
 
-  
+      <Tabs.Screen
+        name="calls"
+        options={{
+          title: "Calls",
+          tabBarLabel: "Calls",
+          tabBarIcon: ({ color, size, focused }) => (
+            <Ionicons
+              name={focused ? "home" : "home-outline"}
+              size={size}
+              color={color}
+            />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="settings"
+        options={{
+          title: "Settings",
+          tabBarLabel: "Settings",
+          tabBarIcon: ({ color, size, focused }) => (
+            <Ionicons
+              name={focused ? "settings" : "settings-outline"}
+              size={size}
+              color={color}
+            />
+          ),
+        }}
+      />
     </Tabs>
   );
 }

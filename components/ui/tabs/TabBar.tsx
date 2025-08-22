@@ -1,8 +1,8 @@
 import React, { createContext, useContext } from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 import {
-    TabBarContainerProps, TabBarContextProps,
-    TabBarItemProps,
+  TabBarContainerProps, TabBarContextProps,
+  TabBarItemProps,
 } from "./types";
 
 const TabBarContext = createContext<TabBarContextProps | null>(null);
@@ -40,7 +40,7 @@ export const TabBarItem: React.FC<TabBarItemProps> = ({
     <TabBarContext.Provider value={{ isFocused }}>
       <TouchableOpacity
         onPress={onPress}
-        className="flex-1 items-center justify-center "
+        className="flex-1  items-center justify-center "
         accessibilityRole="button"
         accessibilityState={isFocused ? { selected: true } : {}}
       >
@@ -84,7 +84,7 @@ export const TabBarLabel = ({ children }: { children: React.ReactNode }) => {
   const { isFocused } = useTabBar();
   return (
     <Text
-      className={`mt-1 text-xs ${isFocused ? "text-white" : "text-indigo-200"}`}
+      className={`mt-1 text-xs ${isFocused ? "text-gray-400" : "text-indigo-200"}`}
     >
       {children}
     </Text>
@@ -104,7 +104,7 @@ export const TabBarBadge = ({ count }: { count: number }) => {
 export const TabBarIcon = ({ children }: { children: React.ReactNode }) => {
   const { isFocused } = useTabBar();
   return (
-    <View className={`p-2 rounded-full ${isFocused ? "bg-indigo-700" : ""}`}>
+    <View className={`p-2 rounded-full ${isFocused ? "" : ""}`}>
       {children}
     </View>
   );

@@ -1,4 +1,5 @@
 import Accordion from "@/components/ui/accordion/Accordion";
+import Badge from "@/components/ui/badge/Badge";
 import Button from "@/components/ui/button/Button";
 import {
   ButtonAction,
@@ -31,6 +32,7 @@ import Table from "@/components/ui/table/Table";
 import TextArea from "@/components/ui/textArea/TextArea";
 import { TextAreaSize } from "@/components/ui/textArea/types";
 import Wrapper from "@/components/ui/Wrapper";
+import { EvilIcons } from "@expo/vector-icons";
 import { useState } from "react";
 import { ScrollView, Text, View } from "react-native";
 
@@ -629,6 +631,21 @@ export default function Index() {
             </View>
           </CustomModal>
         </Wrapper>
+
+        <View className="py-2">
+        <Text className="mb-2">Badges</Text>
+        <View className="flex-row items-center gap-3 mb-3">
+          <Badge size="xs" color="primary">New</Badge>
+          <Badge size="sm" color="secondary">Beta</Badge>
+          <Badge size="md" color="success">Success</Badge>
+          <Badge size="lg" color="warning">Warn</Badge>
+        </View>
+
+        <View className="flex-row items-center gap-3">
+          <Badge size="md" color="danger" icon={<EvilIcons name="star" size={14} color="white" />}>Hot</Badge>
+          <Badge size="md" color="neutral" icon={<EvilIcons name="bell" size={14} color="#374151" />}>Notice</Badge>
+        </View>
+      </View>
       </View>
     </ScrollView>
   );
