@@ -1,9 +1,9 @@
 import Avatar from "@/components/ui/avatar/Avatar";
 import Navbar from "@/components/ui/navbar/Navbar";
 import { Drawer } from "@/components/ui/sidebar/SIdebar";
-import { Ionicons } from "@expo/vector-icons";
+import { Entypo, Ionicons, MaterialIcons } from "@expo/vector-icons";
 import { Drawer as ExpoDrawer } from "expo-router/drawer";
-import { Text, TouchableOpacity } from "react-native";
+import { Text, TouchableOpacity, View } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 export default function Layout() {
@@ -63,8 +63,44 @@ export default function Layout() {
             drawerPosition: "right",
             header: () => (
               <Navbar
+                left={{
+                  render() {
+                    return (
+                      <View className="flex-row gap-1 bg-gray-200  h-10 w-10 rounded-full items-center justify-center">
+                        <View className="bg-black p-0.5  rounded-full"></View>
+                        <View className="bg-black p-0.5 rounded-full"></View>
+                        <View className="bg-black p-0.5 rounded-full"></View>
+                      </View>
+                    );
+                  },
+                }}
                 backgroundClassName="bg-white border-none"
+                className="border border-transparent p-1"
                 titleClassName="text-sm text-white"
+                right={[
+                  {
+                    render() {
+                      return (
+                        <View className="bg-gray-200 p-2 rounded-full">
+                          <Entypo name="camera" size={16} color="black" />
+                        </View>
+                      );
+                    },
+                  },
+                  {
+                    render() {
+                      return (
+                        <View>
+                          <MaterialIcons
+                            name="add-circle"
+                            size={32}
+                            color="green"
+                          />
+                        </View>
+                      );
+                    },
+                  },
+                ]}
               />
             ),
             headerRight: () => (

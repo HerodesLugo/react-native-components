@@ -16,6 +16,7 @@ export default function RootLayout() {
             }}
             title="React Native Components"
             subtitle="Reutilizables"
+            className="border-white border"
             backgroundClassName="bg-indigo-600"
             titleClassName="text-sm text-white"
             // right={

@@ -2,12 +2,14 @@ import Chat from "@/components/chat/Chat";
 import Badge from "@/components/ui/badge/Badge";
 import Input from "@/components/ui/input/Input";
 import { EvilIcons } from "@expo/vector-icons";
+import { StatusBar } from "expo-status-bar";
 import React from "react";
 import { Text, View } from "react-native";
 
 const TabsScreen = () => {
   return (
     <View className="bg-white flex-1 p-5">
+      <StatusBar style="dark" />
       <View>
         <Text className="font-bold text-5xl">Chats</Text>
       </View>
@@ -40,7 +42,8 @@ const TabsScreen = () => {
         </Badge>
       </View>
 
-      <View className="py-2 justify-center">
+      <View className="  gap-6 flex-row items-center">
+        <EvilIcons name="archive" size={24} color="black" className="ml-5" />
         <Text className="text-lg font-bold">Archived</Text>
       </View>
 
