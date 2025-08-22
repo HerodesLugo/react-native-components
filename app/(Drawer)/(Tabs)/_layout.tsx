@@ -92,7 +92,7 @@ export default function TabsLayout() {
                     ? options.tabBarLabel
                     : options.title}
                 </TabBarLabel>
-                <TabBarBadge count={options.tabBarBadge as number} />
+                <TabBarBadge count={options.tabBarBadge as number}  />
               </View>
             );
           }}
@@ -107,6 +107,7 @@ export default function TabsLayout() {
           options={{
             title,
             tabBarLabel,
+            tabBarBadge: name === "index" ? 3 : undefined,
             tabBarIcon: ({ color, size, focused }) => (
               <Ionicons
                 name={focused ? icon.active : icon.inactive}

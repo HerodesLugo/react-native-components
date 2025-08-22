@@ -1,9 +1,10 @@
+import Fernando from "@/assets/fernando.png";
 import Avatar from "@/components/ui/avatar/Avatar";
 import Navbar from "@/components/ui/navbar/Navbar";
 import { Drawer } from "@/components/ui/sidebar/SIdebar";
 import { Entypo, Ionicons, MaterialIcons } from "@expo/vector-icons";
 import { Drawer as ExpoDrawer } from "expo-router/drawer";
-import { Text, TouchableOpacity, View } from "react-native";
+import { Pressable, Text, TouchableOpacity, View } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 export default function Layout() {
@@ -11,17 +12,14 @@ export default function Layout() {
     <GestureHandlerRootView style={{ flex: 1 }}>
       <ExpoDrawer
         drawerContent={(props) => (
-          <Drawer.Container containerClassName="bg-indigo-800" {...props}>
-            <Drawer.Header>
-              <Avatar
-                size={80}
-                source={{
-                  uri: "https://placehold.co/100x100/EFEFEF/333?text=Logo",
-                }}
-              />
+          <Drawer.Container containerClassName="bg-white" {...props}>
+            <Drawer.Header className="border-b-white">
+              <Avatar size={120} source={Fernando} />
 
-              <Text className="text-white text-lg font-bold">Jane Doe</Text>
-              <Text className="text-gray-400 text-sm">
+              <Text className="text-gray-700 text-lg font-bold">
+                Sennior Developer
+              </Text>
+              <Text className="text-gray-500 text-sm">
                 jane.doe@example.com
               </Text>
             </Drawer.Header>
@@ -29,30 +27,28 @@ export default function Layout() {
             <Drawer.Content>
               <Drawer.Item
                 href="/(tabs)"
-                icon={
-                  <Ionicons name="home-outline" size={22} color="#D1D5DB" />
-                }
+                icon={<Ionicons name="home-outline" size={22} color="black" />}
               >
-                <Text className="text-gray-200 text-base">Inicio</Text>
+                <Text className="text-gray-700 text-base">Inicio</Text>
               </Drawer.Item>
               <Drawer.Item
                 href="/user/jane"
                 icon={
-                  <Ionicons name="person-outline" size={22} color="#D1D5DB" />
+                  <Ionicons name="person-outline" size={22} color="black" />
                 }
               >
-                <Text className="text-gray-200 text-base">Perfil</Text>
+                <Text className="text-gray-700 text-base">Perfil</Text>
               </Drawer.Item>
             </Drawer.Content>
 
-            <Drawer.Footer>
+            <Drawer.Footer className="border-t-white">
               <Drawer.Item
                 href="/settings"
                 icon={
-                  <Ionicons name="settings-outline" size={22} color="#9CA3AF" />
+                  <Ionicons name="settings-outline" size={22} color="black" />
                 }
               >
-                <Text className="text-gray-300">Configuración</Text>
+                <Text className="text-gray-700">Configuración</Text>
               </Drawer.Item>
             </Drawer.Footer>
           </Drawer.Container>
@@ -60,17 +56,20 @@ export default function Layout() {
         screenOptions={({ navigation }) => {
           return {
             headerShown: true,
-            drawerPosition: "right",
+            drawerPosition: "left",
             header: () => (
               <Navbar
                 left={{
                   render() {
                     return (
-                      <View className="flex-row gap-1 bg-gray-200  h-10 w-10 rounded-full items-center justify-center">
+                      <Pressable
+                        onPress={() => navigation.toggleDrawer()}
+                        className="flex-row gap-1 bg-gray-200  h-10 w-10 rounded-full items-center justify-center"
+                      >
                         <View className="bg-black p-0.5  rounded-full"></View>
                         <View className="bg-black p-0.5 rounded-full"></View>
                         <View className="bg-black p-0.5 rounded-full"></View>
-                      </View>
+                      </Pressable>
                     );
                   },
                 }}
