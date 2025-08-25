@@ -4,7 +4,7 @@ import Footer from "./Footer";
 import Header from "./Header";
 import Item from "./Item";
 
-export const Drawer = {
+const Drawer = {
   Container,
   Header,
   Content,
