@@ -1,12 +1,11 @@
 import Fernando from "@/assets/fernando.png";
 import Avatar from "@/components/ui/avatar/Avatar";
 import Navbar from "@/components/ui/navbar/Navbar";
-import Drawer from "@/components/ui/sidebar";
 import { Entypo, Ionicons, MaterialIcons } from "@expo/vector-icons";
-// import { Drawer as ExpoDrawer } from "expo-router/drawer";
 import { Drawer as ExpoDrawer } from "expo-router/drawer";
 import { Pressable, Text, TouchableOpacity, View } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
+import Drawer from "../../components/ui/sidebar";
 
 export default function Layout() {
   return (
