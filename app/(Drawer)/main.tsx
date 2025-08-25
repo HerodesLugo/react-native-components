@@ -431,7 +431,7 @@ export default function Index() {
           <Table
             columns={tableColumns}
             data={tableData}
-            size="sm"            
+            size="sm"
             sortable
             rowKey="id"
           />
@@ -632,20 +632,17 @@ export default function Index() {
           </CustomModal>
         </Wrapper>
 
-        <View className="py-2">
-        <Text className="mb-2">Badges</Text>
-        <View className="flex-row items-center gap-3 mb-3">
-          <Badge size="xs" color="primary">New</Badge>
-          <Badge size="sm" color="secondary">Beta</Badge>
-          <Badge size="md" color="success">Success</Badge>
-          <Badge size="lg" color="warning">Warn</Badge>
-        </View>
-
-        <View className="flex-row items-center gap-3">
-          <Badge size="md" color="danger" icon={<EvilIcons name="star" size={14} color="white" />}>Hot</Badge>
-          <Badge size="md" color="neutral" icon={<EvilIcons name="bell" size={14} color="#374151" />}>Notice</Badge>
-        </View>
-      </View>
+        <Wrapper label="Badge" className="p-4">
+          <Text className="mb-2">Variantes de tamaño y color</Text>
+          <View className="flex-row flex-wrap gap-3 mb-3 items-center">
+            <Badge size="xs" color="primary">New</Badge>
+            <Badge size="sm" color="secondary">Beta</Badge>
+            <Badge size="md" color="success">Success</Badge>
+            <Badge size="lg" color="warning">Warn</Badge>
+            <Badge size="md" color="danger" icon={<EvilIcons name="star" size={14} color="white" />}>Hot</Badge>
+            <Badge size="md" color="neutral" icon={<EvilIcons name="bell" size={14} color="#374151" />}>Notice</Badge>
+          </View>
+        </Wrapper>
       </View>
     </ScrollView>
   );

@@ -26,7 +26,7 @@ export default function Layout() {
 
             <Drawer.Content>
               <Drawer.Item
-                href="/(tabs)"
+                href="/"
                 icon={<Ionicons name="home-outline" size={22} color="black" />}
               >
                 <Text className="text-gray-700 text-base">Inicio</Text>
@@ -38,6 +38,14 @@ export default function Layout() {
                 }
               >
                 <Text className="text-gray-700 text-base">Perfil</Text>
+              </Drawer.Item>
+              <Drawer.Item
+                href="main"
+                icon={
+                  <Ionicons name="person-outline" size={22} color="black" />
+                }
+              >
+                <Text className="text-gray-700 text-base">Components</Text>
               </Drawer.Item>
             </Drawer.Content>
 

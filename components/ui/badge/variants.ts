@@ -8,8 +8,8 @@ export const sizeClasses: Record<BadgeSize, { container: string; text: string }>
 };
 
 export const colorClasses: Record<BadgeColor, { container: string; text: string }> = {
-  primary: { container: "bg-primary-600", text: "text-white" },
-  secondary: { container: "bg-secondary-600", text: "text-white" },
+  primary: { container: "bg-primary-100", text: "text-white" },
+  secondary: { container: "bg-secondary-100", text: "text-white" },
   success: { container: "bg-green-600", text: "text-white" },
   warning: { container: "bg-yellow-500", text: "text-white" },
   danger: { container: "bg-red-600", text: "text-white" },
