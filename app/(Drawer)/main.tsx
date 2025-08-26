@@ -8,6 +8,7 @@ import {
 } from "@/components/ui/button/types";
 import Checkbox from "@/components/ui/checkbox/Checkbox";
 import { CheckboxSize } from "@/components/ui/checkbox/types";
+import Icon from "@/components/ui/icon/Icon";
 import Input from "@/components/ui/input/Input";
 import {
   InputSize,
@@ -34,13 +35,34 @@ import { TextAreaSize } from "@/components/ui/textArea/types";
 import Wrapper from "@/components/ui/Wrapper";
 import { EvilIcons } from "@expo/vector-icons";
 import { useState } from "react";
-import { ScrollView, Text, View } from "react-native";
+import { Pressable, ScrollView, Text, View } from "react-native";
+import Svg, { Path } from "react-native-svg";
 
 const PREFERENCES = [
   { id: "newsletter", label: "Recibir boletín informativo" },
   { id: "promotions", label: "Aceptar promociones especiales" },
   { id: "updates", label: "Notificarme sobre actualizaciones" },
 ];
+
+function CheckSvg({
+  size = 20,
+  color = "#10B981",
+}: {
+  size?: number;
+  color?: string;
+}) {
+  return (
+    <Svg width={size} height={size} viewBox="0 0 24 24" fill="none">
+      <Path
+        d="M20 6L9 17l-5-5"
+        stroke={color}
+        strokeWidth={2}
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </Svg>
+  );
+}
 
 export default function Index() {
   // Estado para Button
@@ -714,6 +736,37 @@ export default function Index() {
             >
               Notice
             </Badge>
+          </View>
+        </Wrapper>
+
+        <Wrapper label="Icon" className="p-4">
+          <Text className="mb-2">Variantes y libraries</Text>
+          <View className="flex-row items-center gap-3 mb-3">
+            <Icon library="Feather" name="camera" />
+            <Icon
+              library="Ionicons"
+              name="ios-checkmark-circle"
+              color="#10B981"
+            />
+            <Icon library="EvilIcons" name="star" color="#F59E0B" />
+            <Icon library="FontAwesome" name="heart" color="#EF4444" />
+          </View>
+
+          <Text className="mb-2">Tamaños y wrappers</Text>
+          <View className="flex-row items-center gap-3 mb-3">
+            <Icon
+              svg={<CheckSvg />}
+              size="xs"
+              library="EvilIcons"
+            />
+            <Icon size="sm" name="bell" />
+            <Icon size="md" name="bell" />
+            <Icon size="lg" name="bell"
+              
+            />
+            <Pressable onPress={() => alert("Icon pressable")}>
+              <Icon name="activity" />
+            </Pressable>
           </View>
         </Wrapper>
       </View>
