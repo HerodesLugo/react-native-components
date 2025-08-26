@@ -1,11 +1,16 @@
-import { Text, TouchableOpacity, View } from "react-native";
+import Button from "@/components/ui/button/Button";
+import { useEffect } from "react";
+import { ScrollView, Text, TouchableOpacity, View } from "react-native";
 import Animated, {
+  Easing,
   useAnimatedProps,
+  useAnimatedStyle,
   useSharedValue,
+  withRepeat,
   withSpring,
   withTiming,
 } from "react-native-reanimated";
-import { Circle } from "react-native-svg";
+import Svg, { Circle } from "react-native-svg";
 
 export default function AnimationsScreen() {
   //   const fadeAnim = React.useRef(new Animated.Value(0)).current;
@@ -54,79 +59,135 @@ export default function AnimationsScreen() {
     width.value = withSpring(width.value - 50);
   };
 
+  const duration = 2000;
+  const defaultAnim = useSharedValue(100 / 2 - 160);
+  const linearAnim = useSharedValue(100 / 2 - 160);
+
+  const animatedDefault = useAnimatedStyle(() => ({
+    transform: [{ translateX: withSpring(defaultAnim.value) }],
+  }));
+
+  const animatedChanged = useAnimatedStyle(() => ({
+    transform: [{ translateX: linearAnim.value }],
+  }));
+
+  useEffect(() => {
+    linearAnim.value = withRepeat(
+      withTiming(-linearAnim.value, {
+        duration,
+        easing: Easing.linear,
+      }),
+      -1,
+      true
+    );
+
+    defaultAnim.value = withRepeat(
+      withTiming(-defaultAnim.value, {
+        duration,
+      }),
+      -1,
+      true
+    );
+  }, []);
+
   return (
-    <View className="flex-1 p-10 gap-5">
-      {/*  */}
-      <View className="gap-2">
-        <Text>Increase Width</Text>
-        <Animated.View
-          style={{
-            width,
-            height: 100,
-            maxWidth: "100%",
-            backgroundColor: "violet",
-          }}
-        />
+    <ScrollView>
+      <View className="flex-1 p-10 gap-5">
+        {/*  */}
+        <View className="gap-2">
+          <Text>Increase Width</Text>
+          <Animated.View
+            style={{
+              width,
+              height: 100,
+              maxWidth: "100%",
+              backgroundColor: "violet",
+            }}
+          />
 
-        <View className="flex-row justify-between">
-          <TouchableOpacity
-            className="border p-3 rounded-3xl"
-            onPress={handleIncrease}
-          >
-            <Text>Press me to increase width</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            className="border p-3 rounded-3xl"
-            onPress={handleDecrease}
-          >
-            <Text>Press me to decrease width</Text>
-          </TouchableOpacity>
+          <View className="flex-row gap-10 justify-between">
+            <TouchableOpacity
+              className="border p-3 rounded-3xl"
+              onPress={handleIncrease}
+            >
+              <Text>Press me to increase width</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              className="border p-3 rounded-3xl"
+              onPress={handleDecrease}
+            >
+              <Text>Press me to decrease width</Text>
+            </TouchableOpacity>
+          </View>
         </View>
-      </View>
-      {/*  */}
-      <View className="gap-2">
-        <Text>Translate Box</Text>
-        <Animated.View
-          style={{
-            width: 100,
-            height: 100,
-            transform: [{ translateX }],
-            backgroundColor: "purple",
-          }}
-        />
-        <View className="flex-row justify-between">
-          <TouchableOpacity
-            className="border p-3 rounded-3xl"
-            onPress={handleTranslate}
-          >
-            <Text>Press me to translate to right</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            className="border p-3 rounded-3xl"
-            onPress={handleTranslateToLeft}
-          >
-            <Text>Press me to translate to left</Text>
-          </TouchableOpacity>
+        {/*  */}
+        <View className="gap-2">
+          <Text>Translate Box</Text>
+          <Animated.View
+            style={{
+              width: 100,
+              height: 100,
+              transform: [{ translateX }],
+              backgroundColor: "purple",
+            }}
+          />
+          <View className="flex-row justify-between">
+            <TouchableOpacity
+              className="border p-3 rounded-3xl"
+              onPress={handleTranslate}
+            >
+              <Text>Press me to translate to right</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              className="border p-3 rounded-3xl"
+              onPress={handleTranslateToLeft}
+            >
+              <Text>Press me to translate to left</Text>
+            </TouchableOpacity>
+          </View>
         </View>
-      </View>
 
-      <View className="gap-2">
-        <Text>Increase Ring</Text>
-        <AnimatedCircle
-          cx={50}
-          cy={50}
-          fill="#b58df1"
-          animatedProps={animateProps}
-        />
-        <View className="flex-row justify-between">
-          <TouchableOpacity
-            className="border p-3 rounded-3xl"
+        <View className="gap-10 items-center">
+          <Text>Increase Ring</Text>
+
+          <Svg width={400} height={400} viewBox="0 0 100 100">
+            <AnimatedCircle
+              cx={50}
+              cy={50}
+              fill="#b58df1"
+              animatedProps={animateProps}
+            />
+          </Svg>
+
+        
+          <Button
+            variant="outline"
             onPress={handleIncreaseRing}
           >
             <Text>Press me to increase ring</Text>
-          </TouchableOpacity>
+          </Button>
+        </View>
+
+        <View className="gap-2 my-10 justify-center items-center">
+          <Animated.View
+            style={animatedDefault}
+            className="h-40 w-40 bg-indigo-800 rounded justify-center"
+          >
+            <Text className="text-white font-bold text-center text-2xl">
+              Inout
+            </Text>
+          </Animated.View>
+
+          <Animated.View
+            style={animatedChanged}
+            className="h-40 w-40 bg-indigo-800 rounded justify-center"
+          >
+            <Text className="text-white font-bold text-center text-2xl">
+              Inout
+            </Text>
+          </Animated.View>
         </View>
       </View>
-    </View>
+    </ScrollView>
   );
 }
