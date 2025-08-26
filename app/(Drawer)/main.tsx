@@ -17,6 +17,7 @@ import {
 } from "@/components/ui/input/types";
 import CustomModal from "@/components/ui/modal/CustomModal";
 import { ModalVariant } from "@/components/ui/modal/types";
+import { useNotification } from "@/components/ui/notification";
 import ProgressBar from "@/components/ui/progressBar/ProgressBar";
 import {
   ProgressBarColor,
@@ -143,6 +144,7 @@ export default function Index() {
     { id: "6", name: "Frank", email: "frank@example.com", role: "Viewer" },
   ];
 
+  const { showNotification } = useNotification();
   return (
     <ScrollView className="flex-1 bg-indigo-50 p-4">
       <View className="gap-4 pb-6">
@@ -754,19 +756,61 @@ export default function Index() {
 
           <Text className="mb-2">Tamaños y wrappers</Text>
           <View className="flex-row items-center gap-3 mb-3">
-            <Icon
-              svg={<CheckSvg />}
-              size="xs"
-              library="EvilIcons"
-            />
+            <Icon svg={<CheckSvg />} size="xs" library="EvilIcons" />
             <Icon size="sm" name="bell" />
             <Icon size="md" name="bell" />
-            <Icon size="lg" name="bell"
-              
-            />
+            <Icon size="lg" name="bell" />
             <Pressable onPress={() => alert("Icon pressable")}>
               <Icon name="activity" />
             </Pressable>
+          </View>
+        </Wrapper>
+
+        <Wrapper label="Toast / Notificaciones">
+          <Text className="text-lg mb-4">Disparar Notificaciones</Text>
+
+          <View className="gap-2">
+            <Button
+              variant="solid"
+              action="positive"
+              onPress={() =>
+                showNotification({
+                  type: "success",
+                  title: "¡Bien Hecho!",
+                  message: "La operación se completó correctamente.",
+                })
+              }
+            >
+              <Text className="text-center text-white">Éxito</Text>
+            </Button>
+            <Button
+              variant="solid"
+              action="negative"
+              onPress={() =>
+                showNotification({
+                  type: "error",
+                  title: "¡Hubo un Error!",
+                  message: "No se pudo guardar el archivo.",
+                })
+              }
+            >
+              <Text className="text-center text-white">Error</Text>
+            </Button>
+            <Button
+              variant="solid"
+              action="secondary"
+              onPress={() =>
+                showNotification({
+                  type: "info",
+                  title: "Actualización Disponible",
+                  duration: 5000, // 5 segundos
+                })
+              }
+            >
+              <Text className="text-center text-white">
+                Información (Larga Duración)
+              </Text>
+            </Button>
           </View>
         </Wrapper>
       </View>
