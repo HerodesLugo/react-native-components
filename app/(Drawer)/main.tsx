@@ -224,7 +224,7 @@ export default function Index() {
                 </Button>
               </View>
 
-              <View className="flex-row gap-2">
+              <View className="flex-row gap-2 mt-2">
                 <Button
                   variant="outline"
                   action="primary"
