@@ -702,8 +702,8 @@ export default function Index() {
                 Puedes poner cualquier contenido que necesites aquí dentro. ¡Es
                 totalmente personalizable!
               </Text>
-              <Button onPress={() => setModalVisible(false)}>
-                <Text>Cerrar</Text>
+              <Button size="lg" onPress={() => setModalVisible(false)}>
+                <Text className="text-white">Cerrar</Text>
               </Button>
             </View>
           </CustomModal>
