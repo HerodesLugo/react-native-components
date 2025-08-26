@@ -171,8 +171,61 @@ export default function Index() {
             size={buttonSize}
             onPress={() => alert("Button pressed!")}
           >
-            <Text className="text-center text-white">Hello World</Text>
+            <Text className="text-center text-white ">Hello World</Text>
           </Button>
+
+          {/* Examples adicionales mostrando 'as' y combinaciones */}
+          <View className="mt-4">
+            <Text className="font-semibold mb-2">Examples</Text>
+            <View className="space-y-3">
+              <View className="flex-row gap-2">
+                <Button onPress={() => alert("Pressable default")}>
+                  <Text className="text-center text-white">Pressable</Text>
+                </Button>
+                <Button
+                  as="touchableOpacity"
+                  onPress={() => alert("TouchableOpacity")}
+                >
+                  <Text className="text-center text-white">
+                    TouchableOpacity
+                  </Text>
+                </Button>
+                <Button
+                  as="touchableHighlight"
+                  onPress={() => alert("TouchableHighlight")}
+                >
+                  <Text className="text-center text-white">
+                    TouchableHighlight
+                  </Text>
+                </Button>
+              </View>
+
+              <View className="flex-row gap-2">
+                <Button
+                  variant="outline"
+                  action="primary"
+                  onPress={() => alert("Outline Primary")}
+                >
+                  <Text className="text-center">Outline Primary</Text>
+                </Button>
+                <Button
+                  as="touchableHighlight"
+                  variant="solid"
+                  action="negative"
+                  onPress={() => alert("Solid Negative")}
+                >
+                  <Text className="text-center text-white">Eliminar</Text>
+                </Button>
+                <Button
+                  variant="link"
+                  action="secondary"
+                  onPress={() => alert("Link Secondary")}
+                >
+                  <Text className="text-center">Ver más</Text>
+                </Button>
+              </View>
+            </View>
+          </View>
         </Wrapper>
 
         {/* --- ACCORDION --- */}
@@ -635,12 +688,32 @@ export default function Index() {
         <Wrapper label="Badge" className="p-4">
           <Text className="mb-2">Variantes de tamaño y color</Text>
           <View className="flex-row flex-wrap gap-3 mb-3 items-center">
-            <Badge size="xs" color="primary">New</Badge>
-            <Badge size="sm" color="secondary">Beta</Badge>
-            <Badge size="md" color="success">Success</Badge>
-            <Badge size="lg" color="warning">Warn</Badge>
-            <Badge size="md" color="danger" icon={<EvilIcons name="star" size={14} color="white" />}>Hot</Badge>
-            <Badge size="md" color="neutral" icon={<EvilIcons name="bell" size={14} color="#374151" />}>Notice</Badge>
+            <Badge size="xs" color="primary">
+              New
+            </Badge>
+            <Badge size="sm" color="secondary">
+              Beta
+            </Badge>
+            <Badge size="md" color="success">
+              Success
+            </Badge>
+            <Badge size="lg" color="warning">
+              Warn
+            </Badge>
+            <Badge
+              size="md"
+              color="danger"
+              icon={<EvilIcons name="star" size={14} color="white" />}
+            >
+              Hot
+            </Badge>
+            <Badge
+              size="md"
+              color="neutral"
+              icon={<EvilIcons name="bell" size={14} color="#374151" />}
+            >
+              Notice
+            </Badge>
           </View>
         </Wrapper>
       </View>
