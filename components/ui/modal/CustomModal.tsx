@@ -38,8 +38,6 @@ const CustomModal: React.FC<CustomModalProps> = ({
 
   const modalStyle = variant === "center" ? centerStyle : bottomStyle;
 
-  // compute extra spacing for modal content to respect safe area
-
   return (
     <Modal
       visible={visible}
