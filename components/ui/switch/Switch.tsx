@@ -1,43 +1,40 @@
-import React, { useEffect, useRef } from 'react';
-import { Animated, Easing, Text, TouchableOpacity, View } from 'react-native';
-import { SwitchProps } from './types';
-import { SIZES } from './variants';
+import { Text, TouchableOpacity, View } from "react-native";
+import Animated, { useAnimatedStyle, useSharedValue, withSpring, } from "react-native-reanimated";
+import { SwitchProps } from "./types";
+import { SIZES } from "./variants";
 
 const Switch: React.FC<SwitchProps> = ({
   value,
   onValueChange,
   disabled = false,
   label,
-  size = 'md',
-  activeTrackColor = '#34C759',
-  inactiveTrackColor = '#E9E9EA',
-  thumbColor = '#FFFFFF',
+  size = "md",
+  activeTrackColor = "#34C759",
+  inactiveTrackColor = "#E9E9EA",
+  thumbColor = "#FFFFFF",
 }) => {
-  const animatedValue = useRef(new Animated.Value(value ? 1 : 0)).current;
+  const thumbTranslateX = useSharedValue(1);
+  const trackColor = useSharedValue(inactiveTrackColor);
+
   const { trackWidth, trackHeight, thumbSize, padding } = SIZES[size];
 
-  useEffect(() => {
-    Animated.timing(animatedValue, {
-      toValue: value ? 1 : 0,
-      duration: 200,
-      easing: Easing.inOut(Easing.ease),
-      useNativeDriver: false,
-    }).start();
-  }, [value, animatedValue]);
-
-  const thumbTranslateX = animatedValue.interpolate({
-    inputRange: [0, 1],
-    outputRange: [padding, trackWidth - thumbSize - padding],
+  const thumbStyle = useAnimatedStyle(() => {
+    return {
+      transform: [{ translateX: thumbTranslateX.value }],
+    };
   });
 
-  const trackBackgroundColor = animatedValue.interpolate({
-    inputRange: [0, 1],
-    outputRange: [inactiveTrackColor, activeTrackColor],
+  const backgroundColorStyle = useAnimatedStyle(() => {
+    return {
+      backgroundColor: trackColor.value,
+    };
   });
 
   const handlePress = () => {
     if (!disabled) {
       onValueChange(!value);
+      thumbTranslateX.value = value ? withSpring(padding) : withSpring(trackWidth - thumbSize - padding);
+      trackColor.value = value ? withSpring(inactiveTrackColor) : withSpring(activeTrackColor);
     }
   };
 
@@ -52,21 +49,25 @@ const Switch: React.FC<SwitchProps> = ({
         accessibilityState={{ checked: value, disabled }}
       >
         <Animated.View
-          className={`justify-center rounded-full ${disabled ? 'opacity-50' : ''}`}
-          style={{
-            width: trackWidth,
-            height: trackHeight,
-            backgroundColor: trackBackgroundColor,
-          }}
+          className={`justify-center rounded-full ${disabled ? "opacity-50" : ""}`}
+          style={[
+            {
+              width: trackWidth,
+              height: trackHeight,
+            },
+            backgroundColorStyle,
+          ]}
         >
           <Animated.View
             className="rounded-full shadow-md"
-            style={{
-              width: thumbSize,
-              height: thumbSize,
-              backgroundColor: thumbColor,
-              transform: [{ translateX: thumbTranslateX }],
-            }}
+            style={[
+              {
+                width: thumbSize,
+                height: thumbSize,
+                backgroundColor: thumbColor,
+              },
+              thumbStyle,
+            ]}
           />
         </Animated.View>
       </TouchableOpacity>
