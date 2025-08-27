@@ -1,5 +1,10 @@
+import { useEffect } from "react";
 import { Text, TouchableOpacity, View } from "react-native";
-import Animated, { useAnimatedStyle, useSharedValue } from "react-native-reanimated";
+import Animated, {
+  useAnimatedStyle,
+  useSharedValue,
+  withSpring,
+} from "react-native-reanimated";
 import { getClass } from "./getClass";
 import { RadioButtonProps } from "./types";
 import { SIZES } from "./variants";
@@ -15,15 +20,23 @@ const RadioButton: React.FC<RadioButtonProps> = ({
 }) => {
   const isSelected = value === selectedValue;
   const { outer, inner, textClass } = SIZES[size];
-  const { innerDot, labelClasses, outerRing } = getClass({isSelected, invalid, textClass});
+  const { innerDot, labelClasses, outerRing } = getClass({
+    isSelected,
+    invalid,
+    textClass,
+  });
 
   //hooks
-  const animatedValue = useSharedValue(1);
+  const animatedValue = useSharedValue(isSelected ? 1 : 0);
   const animatedStyle = useAnimatedStyle(() => {
     return {
       transform: [{ scale: animatedValue.value }],
     };
   });
+
+  useEffect(() => {
+    animatedValue.value = withSpring(isSelected ? 1 : 0);
+  }, [isSelected]);
 
   //handles
   const handlePress = () => {
@@ -40,7 +53,7 @@ const RadioButton: React.FC<RadioButtonProps> = ({
       accessibilityRole="radio"
       accessibilityState={{ checked: isSelected, disabled }}
     >
-      <View className={outerRing} style={{ width: outer, height: outer }}>
+      <View className={outerRing} style={[{ width: outer, height: outer }]}>
         <Animated.View
           className={innerDot}
           style={[
