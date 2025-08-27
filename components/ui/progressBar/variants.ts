@@ -5,7 +5,6 @@ export const sizeMap: Record<string, string> = {
 };
 
 export const colorMap: Record<string, string> = {
-
   primary: "bg-primary-100",
   success: "bg-green-500",
   warning: "bg-yellow-400",
