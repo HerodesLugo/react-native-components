@@ -255,8 +255,8 @@ export default function Index() {
         {/* --- ACCORDION --- */}
         <Wrapper label="Accordion">
           <Text className="mb-2">Single (only one open)</Text>
-          <Accordion type="single" size="md" className="mb-4">
-            <Accordion.Item id="s1" title="Item 1">
+          <Accordion  type="single" size="md" className="mb-4 !bg-white">
+            <Accordion.Item id="s1" className="!bg-white" title="Item 1">
               <Text>Contenido del item 1</Text>
             </Accordion.Item>
             <Accordion.Item id="s2" title="Item 2">
@@ -279,7 +279,7 @@ export default function Index() {
         </Wrapper>
 
         {/* --- INPUT --- */}
-        <Wrapper label="Input">
+        <Wrapper className="flex-1" label="Input">
           <View className="flex-row items-center mb-3">
             <Text className="flex-1">Variant</Text>
             <Text className="flex-1">Size</Text>

@@ -1,15 +1,9 @@
-import React, {
-    createContext,
-    useCallback,
-    useContext,
-    useMemo,
-    useState,
-} from "react";
-import { Pressable, Text, View } from "react-native";
+import React, { createContext, useCallback, useState } from "react";
+import { View } from "react-native";
+import AccordionItem from "./Item";
 import { AccordionItemProps, AccordionProps, ContextValue } from "./types";
-import { sizeClasses } from "./variants";
 
-const AccordionContext = createContext<ContextValue | null>(null);
+export const AccordionContext = createContext<ContextValue | null>(null);
 
 const Accordion = ({
   type = "multiple",
@@ -20,38 +14,31 @@ const Accordion = ({
   className,
   ...props
 }: AccordionProps) => {
-  const initialOpen = useMemo(() => {
-    if (!defaultValue) return [] as string[];
-    return Array.isArray(defaultValue) ? defaultValue : [defaultValue];
-  }, [defaultValue]);
+  const initialOpenIds = defaultValue ? (Array.isArray(defaultValue) ? defaultValue : [defaultValue]) : [];
+  const [openItemIds, setOpenItemIds] = useState<string[]>(initialOpenIds);
 
-  const [openIds, setOpenIds] = useState<string[]>(initialOpen);
-
-  const toggle = useCallback(
-    (id: string) => {
-      setOpenIds((prev) => {
-        const exists = prev.includes(id);
-        let next: string[] = [];
+  const handleToggleItem = useCallback(
+    (itemId: string) => {
+      setOpenItemIds((prevOpenItemIds) => {
+        let updatedOpenItemIds: string[];
+        
         if (type === "single") {
-          next = exists ? [] : [id];
-        } else {
-          if (exists) next = prev.filter((x) => x !== id);
-          else next = [...prev, id];
+          updatedOpenItemIds = prevOpenItemIds.includes(itemId) ? [] : [itemId];
         }
-        onChange?.(next);
-        return next;
+
+        updatedOpenItemIds = prevOpenItemIds.includes(itemId) ? prevOpenItemIds.filter((id) => id !== itemId) : [...prevOpenItemIds, itemId];
+        onChange?.(updatedOpenItemIds);
+
+        return updatedOpenItemIds;
       });
     },
     [type, onChange]
   );
 
-  const value = useMemo(
-    () => ({ openIds, toggle, size }),
-    [openIds, size, toggle]
-  );
+  const contextValue = { openIds: openItemIds, toggle: handleToggleItem, size };
 
   return (
-    <AccordionContext.Provider value={value}>
+    <AccordionContext.Provider value={contextValue}>
       <View className={className || ""} {...props}>
         {children}
       </View>
@@ -59,39 +46,8 @@ const Accordion = ({
   );
 };
 
-const AccordionItem = ({
-  id,
-  title,
-  children,
-  className,
-  disabled,
-}: AccordionItemProps) => {
-  const ctx = useContext(AccordionContext);
-  if (!ctx) throw new Error("Accordion.Item must be used within an Accordion");
-  const { openIds, toggle, size } = ctx;
-  const isOpen = openIds.includes(id);
-  const sc = sizeClasses[size];
-
-  return (
-    <View className={`border-b border-gray-200 ${className || ""}`}>
-      <Pressable
-        onPress={() => !disabled && toggle(id)}
-        className={`flex-row justify-between items-center ${sc.title}`}
-      >
-        {typeof title === "string" ? <Text>{title}</Text> : title}
-        <Text>{isOpen ? "-" : "+"}</Text>
-      </Pressable>
-
-      {isOpen ? (
-        <View className={`${sc.content} bg-white`}>{children}</View>
-      ) : null}
-    </View>
-  );
-};
-
-// attach Item to Accordion for pattern Accordion.Item
 (Accordion as any).Item = AccordionItem;
 
-export default Accordion as unknown as React.FC<AccordionProps> & {
+export default Accordion as React.FC<AccordionProps> & {
   Item: React.FC<AccordionItemProps>;
 };
