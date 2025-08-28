@@ -31,14 +31,14 @@ export default function Layout() {
               >
                 <Text className="text-gray-700 text-base">Inicio</Text>
               </Drawer.Item>
-              <Drawer.Item
+              {/* <Drawer.Item
                 href="/user/jane"
                 icon={
                   <Ionicons name="person-outline" size={22} color="black" />
                 }
               >
                 <Text className="text-gray-700 text-base">Perfil</Text>
-              </Drawer.Item>
+              </Drawer.Item> */}
               <Drawer.Item
                 href="/main"
                 icon={
@@ -50,7 +50,7 @@ export default function Layout() {
               <Drawer.Item
                 href="/animations"
                 icon={
-                  <Ionicons name="person-outline" size={22} color="black" />
+                  <Ionicons name='apps' size={22} color="black" />
                 }
               >
                 <Text className="text-gray-700 text-base">Animations</Text>
