@@ -28,6 +28,7 @@ import RadioButton from "@/components/ui/radio/RadioButton";
 import { RadioButtonSize } from "@/components/ui/radio/types";
 import Select from "@/components/ui/select/Select";
 import CustomSlider from "@/components/ui/slider/Slider";
+import { useSnackbar } from "@/components/ui/snackbar/hooks/useSnackbar";
 import Spinner from "@/components/ui/spinner/Spinner";
 import Switch from "@/components/ui/switch/Switch";
 import { SwitchSize } from "@/components/ui/switch/types";
@@ -37,7 +38,14 @@ import { TextAreaSize } from "@/components/ui/textArea/types";
 import Wrapper from "@/components/ui/Wrapper";
 import { EvilIcons } from "@expo/vector-icons";
 import { useState } from "react";
-import { Alert, Pressable, SafeAreaView, ScrollView, Text, View } from "react-native";
+import {
+  Alert,
+  Pressable,
+  SafeAreaView,
+  ScrollView,
+  Text,
+  View,
+} from "react-native";
 import Animated, {
   useAnimatedStyle,
   useSharedValue,
@@ -165,6 +173,8 @@ export default function Index() {
       buttonAbsoluteValue.value === 0 ? 1 : 0
     );
   };
+
+  const { showSnackbar } = useSnackbar();
 
   return (
     <SafeAreaView className="flex-1 bg-indigo-50 pb-0">
@@ -834,6 +844,18 @@ export default function Index() {
                 </Text>
               </Button>
             </View>
+          </Wrapper>
+          <Wrapper label="Snackbar / Mensajes">
+            <Button
+              onPress={() => {
+                showSnackbar({
+                  message: "Este es un mensaje de snackbar",
+                  duration: 1000,
+                });
+              }}
+            >
+              <Text>Mostrar Snackbar</Text>
+            </Button>
           </Wrapper>
         </View>
       </ScrollView>
