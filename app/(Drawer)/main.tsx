@@ -35,6 +35,7 @@ import { SwitchSize } from "@/components/ui/switch/types";
 import Table from "@/components/ui/table/Table";
 import TextArea from "@/components/ui/textArea/TextArea";
 import { TextAreaSize } from "@/components/ui/textArea/types";
+import { Tooltip } from "@/components/ui/tooltip/Tooltip";
 import Wrapper from "@/components/ui/Wrapper";
 import { EvilIcons } from "@expo/vector-icons";
 import { useState } from "react";
@@ -856,6 +857,15 @@ export default function Index() {
             >
               <Text>Mostrar Snackbar</Text>
             </Button>
+          </Wrapper>
+
+          <Wrapper label="Tooltip">
+            
+            <Tooltip text="Hola soy un tooltip loveo loveo loveo loveo loveo loveo loveo loveo loveo....">
+              <View className="bg-blue-500 p-4 rounded-lg">
+                <Text className="text-white font-bold">Tócame</Text>
+              </View>
+            </Tooltip>
           </Wrapper>
         </View>
       </ScrollView>

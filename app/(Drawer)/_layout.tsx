@@ -49,9 +49,7 @@ export default function Layout() {
               </Drawer.Item>
               <Drawer.Item
                 href="/animations"
-                icon={
-                  <Ionicons name='apps' size={22} color="black" />
-                }
+                icon={<Ionicons name="apps" size={22} color="black" />}
               >
                 <Text className="text-gray-700 text-base">Animations</Text>
               </Drawer.Item>
@@ -128,5 +126,3 @@ export default function Layout() {
     </GestureHandlerRootView>
   );
 }
-
-
