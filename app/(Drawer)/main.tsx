@@ -6,6 +6,7 @@ import {
   ButtonSize,
   ButtonVariant,
 } from "@/components/ui/button/types";
+import Card from "@/components/ui/card/Card";
 import Checkbox from "@/components/ui/checkbox/Checkbox";
 import { CheckboxSize } from "@/components/ui/checkbox/types";
 import Divider from "@/components/ui/divider/DIvider";
@@ -171,7 +172,6 @@ export default function Index() {
     };
   });
   const handleMoreButtons = () => {
-    console.log("se ejecuta");
     buttonAbsoluteValue.value = withSpring(
       buttonAbsoluteValue.value === 0 ? 1 : 0
     );
@@ -891,6 +891,18 @@ export default function Index() {
               currentStep={2}
               onStepPress={(index) => console.log("Step:", index)}
             />
+          </Wrapper>
+
+          <Wrapper label="Card">
+            <Card className="" size="md" variant="outline">
+              <Text>Soy un prueba</Text>
+            </Card>
+
+            <View className="flex-row gap-5 my-2">
+              <Text>Size: SM  MD  LG </Text>
+              <Divider className="" orientation="vertical" />
+              <Text>Variant:  transparent - outline - filled</Text>
+            </View>
           </Wrapper>
         </View>
       </ScrollView>
