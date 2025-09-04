@@ -29,6 +29,7 @@ import {
 import RadioButton from "@/components/ui/radio/RadioButton";
 import { RadioButtonSize } from "@/components/ui/radio/types";
 import Select from "@/components/ui/select/Select";
+import Skeleton from "@/components/ui/skeleton/Skeleton";
 import CustomSlider from "@/components/ui/slider/Slider";
 import { useSnackbar } from "@/components/ui/snackbar/hooks/useSnackbar";
 import Spinner from "@/components/ui/spinner/Spinner";
@@ -171,6 +172,7 @@ export default function Index() {
       pointerEvents: buttonAbsoluteValue.value === 0 ? "none" : "auto",
     };
   });
+
   const handleMoreButtons = () => {
     buttonAbsoluteValue.value = withSpring(
       buttonAbsoluteValue.value === 0 ? 1 : 0
@@ -848,6 +850,7 @@ export default function Index() {
               </Button>
             </View>
           </Wrapper>
+
           <Wrapper label="Snackbar / Mensajes">
             <Button
               onPress={() => {
@@ -899,9 +902,20 @@ export default function Index() {
             </Card>
 
             <View className="flex-row gap-5 my-2">
-              <Text>Size: SM  MD  LG </Text>
+              <Text>Size: SM MD LG </Text>
               <Divider className="" orientation="vertical" />
-              <Text>Variant:  transparent - outline - filled</Text>
+              <Text>Variant: transparent - outline - filled</Text>
+            </View>
+          </Wrapper>
+
+          <Wrapper label="Skeleton">
+            <View className="flex-row gap-2">
+              <Skeleton borderRadius={5} height={100} width={100} />
+              <View className="gap-2.5 justify-center">
+                <Skeleton borderRadius={5} width={100} />
+                <Skeleton borderRadius={5} width={200} />
+                <Skeleton borderRadius={5} width={350} />
+              </View>
             </View>
           </Wrapper>
         </View>
