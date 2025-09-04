@@ -31,6 +31,7 @@ import Select from "@/components/ui/select/Select";
 import CustomSlider from "@/components/ui/slider/Slider";
 import { useSnackbar } from "@/components/ui/snackbar/hooks/useSnackbar";
 import Spinner from "@/components/ui/spinner/Spinner";
+import Stepper from "@/components/ui/stepper/Stepper";
 import Switch from "@/components/ui/switch/Switch";
 import { SwitchSize } from "@/components/ui/switch/types";
 import Table from "@/components/ui/table/Table";
@@ -882,6 +883,14 @@ export default function Index() {
                 <Text>Vertical</Text>
               </View>
             </View>
+          </Wrapper>
+
+          <Wrapper label="Stepper">
+            <Stepper
+              steps={["Cuenta", "Dirección", "Pago", "Confirmación"]}
+              currentStep={2}
+              onStepPress={(index) => console.log("Step:", index)}
+            />
           </Wrapper>
         </View>
       </ScrollView>
