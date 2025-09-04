@@ -1,23 +1,18 @@
 import { View } from "react-native";
+import { DividerProps } from "./types";
 
-export interface DividerProps {
-  orientation: "vertical" | "horizontal";
-  color: string;
-  className: string;
-}
-
-export default function Divider({ ...props }: DividerProps) {
-  const { orientation, className, color = 'black' } = props;
-
+export default function Divider({
+  orientation = "horizontal",
+  className,
+  rounded,
+}: DividerProps) {
+  const baseClasses = orientation === "vertical" ? "h-full w-px" : "w-full h-px";
+  const defaultClasses = "bg-gray-200";
+  const roundedClass = rounded && "rounded-full";
 
   return (
     <View
-      className={`${orientation === 'vertical' ? 'h-full flex-1 w-0.5' : 'w-full h-0.5'}  ${className}`}
-      style={{
-        backgroundColor: color,
-      }}
-    >
-
-    </View>
+      className={`${baseClasses} ${defaultClasses} ${className}  ${roundedClass}`}
+    />
   );
 }

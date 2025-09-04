@@ -869,8 +869,18 @@ export default function Index() {
           </Wrapper>
 
           <Wrapper label="Divider">
-            <View className="border p-2 items-center">
-              <Divider className="" color="red" orientation="vertical" />
+            <View className=" p-2 items-center">
+              <Divider className="" orientation="horizontal" />
+            </View>
+
+            <View className="gap-5">
+              <Text>Orientation:</Text>
+
+              <View className="flex-row gap-5">
+                <Text>Horizontal</Text>
+                <Divider className="" orientation="vertical" />
+                <Text>Vertical</Text>
+              </View>
             </View>
           </Wrapper>
         </View>
