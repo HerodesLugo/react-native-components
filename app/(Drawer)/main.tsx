@@ -8,6 +8,7 @@ import {
 } from "@/components/ui/button/types";
 import Checkbox from "@/components/ui/checkbox/Checkbox";
 import { CheckboxSize } from "@/components/ui/checkbox/types";
+import Divider from "@/components/ui/divider/DIvider";
 import Fab from "@/components/ui/fab/Fab";
 import Icon from "@/components/ui/icon/Icon";
 import Input from "@/components/ui/input/Input";
@@ -860,12 +861,17 @@ export default function Index() {
           </Wrapper>
 
           <Wrapper label="Tooltip">
-            
             <Tooltip text="Hola soy un tooltip loveo loveo loveo loveo loveo loveo loveo loveo loveo....">
               <View className="bg-blue-500 p-4 rounded-lg">
                 <Text className="text-white font-bold">Tócame</Text>
               </View>
             </Tooltip>
+          </Wrapper>
+
+          <Wrapper label="Divider">
+            <View className="border p-2 items-center">
+              <Divider className="" color="red" orientation="vertical" />
+            </View>
           </Wrapper>
         </View>
       </ScrollView>
