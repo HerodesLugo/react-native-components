@@ -18,6 +18,7 @@ import {
   InputType,
   InputVariant,
 } from "@/components/ui/input/types";
+import LinearProgress from "@/components/ui/linearProgress/LinearProgress";
 import CustomModal from "@/components/ui/modal/CustomModal";
 import { ModalVariant } from "@/components/ui/modal/types";
 import { useNotification } from "@/components/ui/notification";
@@ -914,9 +915,14 @@ export default function Index() {
               <View className="gap-2.5 justify-center">
                 <Skeleton borderRadius={5} width={100} />
                 <Skeleton borderRadius={5} width={200} />
-                <Skeleton borderRadius={5} width={350} />
+                <Skeleton borderRadius={5}  />
               </View>
             </View>
+          </Wrapper>
+
+
+          <Wrapper label="Linear Progress">
+            <LinearProgress  duration={3000}  color="#000"/>
           </Wrapper>
         </View>
       </ScrollView>
