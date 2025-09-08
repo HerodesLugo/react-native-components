@@ -12,7 +12,7 @@ export default function RootLayout() {
             headerShown: false,
           }}
         >
-          <Stack.Screen name="home" />
+          <Stack.Screen name="index" />
         </Stack>
       </NotificationProvider>
     </SnackbarProvider>

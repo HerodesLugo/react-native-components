@@ -783,11 +783,11 @@ export default function Index() {
             <Text className="mb-2">Variantes y libraries</Text>
             <View className="flex-row items-center gap-3 mb-3">
               <Icon library="Feather" name="camera" />
-              <Icon
+              {/* <Icon
                 library="Ionicons"
                 name="ios-checkmark-circle"
                 color="#10B981"
-              />
+              /> */}
               <Icon library="EvilIcons" name="star" color="#F59E0B" />
               <Icon library="FontAwesome" name="heart" color="#EF4444" />
             </View>
